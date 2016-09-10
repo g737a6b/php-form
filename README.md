@@ -28,22 +28,16 @@ MOFG_form is suited to all web forms.
 Add a dependency to your project's `composer.json` file.
 
 ```json
-"repositories": [
-	{
-		"type": "package",
-		"package": {
-			"name": "g737a6b/php-form",
-			"version": "master",
-			"source": {
-				"type": "git",
-				"url": "https://github.com/g737a6b/php-form.git",
-				"reference": "master"
-			}
+{
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/g737a6b/php-form.git"
 		}
+	],
+	"require": {
+		"g737a6b/php-form": "*"
 	}
-],
-"require": {
-	"g737a6b/php-form": "*"
 }
 ```
 
