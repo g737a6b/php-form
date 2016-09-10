@@ -126,7 +126,7 @@ hr{
 	z-index: 1;
 	width: 85%;
 	height: 100%;
-	overflow-x: none;
+	overflow-x: hidden;
 	overflow-y: auto;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
