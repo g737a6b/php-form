@@ -1,0 +1,157 @@
+@charset "utf-8";
+
+html, body{
+	background: #f9f9f9 none;
+	font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, sans-serif;
+	font-size: 16px;
+	font-weight: normal;
+	font-style: normal;
+	color: #000;
+	line-height: 1.6;
+	letter-spacing: 0;
+	min-width: 320px;
+}
+
+a,
+.link-like{
+	text-decoration: underline;
+}
+
+a:hover,
+.link-like:hover{
+	text-decoration: none;
+}
+
+input[type="text"],
+textarea{
+	background: #fff none;
+	font-size: 14px;
+	line-height: 21px;
+	border: 1px solid #ccc;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	border-radius: 3px;
+	padding: 2px 4px;
+}
+
+label{
+	display: inline-block;
+}
+
+hr{
+	border-width: 1px 0 0 0;
+	border-style: solid;
+	border-color: #ccc;
+}
+
+.color-01{
+	color: #297acc;
+}
+
+.effect-fade-on-hover{
+	-webkit-transition: opacity 0.15s ease;
+	transition: opacity 0.15s ease;
+}
+
+.effect-fade-on-hover:hover{
+	opacity: 0.6;
+}
+
+#wrapper{
+	max-width: 960px;
+	padding: 30px 20px 40px 20px;
+	margin: 0 auto;
+}
+
+#header{
+	font-size: 14px;
+	margin-bottom: 20px;
+}
+
+#main{
+	max-width: 600px;
+	margin: 0 auto;
+}
+
+#main .form-table{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#main .form-table__t{
+	font-weight: bold;
+	margin: 20px 0 10px 0;
+}
+
+#main .required::after{
+	content: ' *';
+	color: #f26;
+}
+
+#main .btn-01{
+	background: #666 none;
+	font-size: 16px;
+	color: #fff;
+	display: inline-block;
+	border: none;
+	border-radius: 2px;
+	padding: 6px 16px;
+}
+
+#main .btn-01--primary{
+	background: #39f none;
+}
+
+#main .text-preview{
+	background: #fff none;
+	font-size: 14px;
+	display: block;
+	-webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+	box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+	border-radius: 3px;
+	padding: 20px;
+}
+
+#footer{
+	font-size: 14px;
+	margin-top: 40px;
+}
+
+#menu .contents{
+	background: #fff none;
+	position: fixed;
+	top: 0;
+	left: -100%;
+	z-index: 1;
+	width: 85%;
+	height: 100%;
+	overflow-x: none;
+	overflow-y: auto;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-box-shadow: 0 0 32px rgba(0,0,0,0.2);
+	box-shadow: 0 0 32px rgba(0,0,0,0.2);
+	padding: 20px 20px 20px 40px;
+	-webkit-transition: left 0.3s ease;
+	transition: left 0.3s ease;
+}
+
+#menu .menu-toggle:checked + .contents{
+	left: 0;
+}
+
+#menu .list-01{
+	padding-left: 1.6em;
+}
+
+#menu .list-01__item{
+	list-style: disc none outside;
+}
+
+@media screen and (max-width: 799px){
+	#menu .contents{
+		padding-left: 20px;
+	}
+}

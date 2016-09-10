@@ -1,0 +1,24 @@
+{
+	"name": "g737a6b/php-form",
+	"description": "PHP form library.",
+	"keywords": ["form", "contact", "inquiry"],
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Hiroyuki Suzuki",
+			"homepage": "http://mofg.net"
+		}
+	],
+	"support": {
+		"source": "https://github.com/g737a6b/php-form",
+		"issues": "https://github.com/g737a6b/php-form/issues"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "5.5.*"
+	},
+	"autoload": {
+		"psr-4": {
+			"MOFG_form\\": "src/"
+		}
+	}
+}
