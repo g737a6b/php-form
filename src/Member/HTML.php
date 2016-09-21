@@ -99,6 +99,17 @@ class HTML{
 	 * @param string $name
 	 * @param array $attrs (optional)
 	 */
+	public function password($name, $attrs = array()){
+		$attr_txt = $this->get_attr_text($attrs);
+		$data = $this->Form->get_value($name);
+		$data = ( is_string($data) ) ? htmlspecialchars($data) : "";
+		echo "<input type=\"password\" name=\"{$name}\" value=\"{$data}\"{$attr_txt} />";
+	}
+
+	/**
+	 * @param string $name
+	 * @param array $attrs (optional)
+	 */
 	public function textarea($name, $attrs = array()){
 		$attr_txt = $this->get_attr_text($attrs);
 		$data = $this->Form->get_value($name);
