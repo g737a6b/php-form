@@ -27,4 +27,33 @@ class Mail_test extends TestCase{
 		$data = $Mail->construct_data($emails, ", ", Mail::FORMAT_EMAIL_ADDRESS);
 		$this->assertSame(implode(", ", $valid), $data);
 	}
+
+	/**
+	 * @dataProvider group_header_provider
+	 */
+	public function test_group_header($expected, $header){
+		$Mail = new MOFG_form\Member\Mail();
+		$this->assertSame($expected, rtrim($Mail->group_header($header), "\n"));
+	}
+
+	public function group_header_provider(){
+		return array(
+			array(
+				"From: test@example.com",
+				"From: test@example.com"
+			),
+			array(
+				"From: foo@example.com, bar@example.com",
+				"From: foo@example.com\nFrom: bar@example.com"
+			),
+			array(
+				"From: foo@example.com\nReply-To: bar@example.com",
+				"From: foo@example.com\nReply-To: bar@example.com"
+			),
+			array(
+				"From: foo@example.com, bar@example.com\nReply-To: baz@example.com, qux@example.com",
+				"From: foo@example.com\nFrom: bar@example.com\nReply-To: baz@example.com\nReply-To: qux@example.com"
+			)
+		);
+	}
 }
