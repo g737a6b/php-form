@@ -77,25 +77,25 @@ class Mail{
 	 * @param string $header
 	 * @return string
 	 */
-	 public function group_header($header){
-		 if( !is_string($header) ) return false;
-		 $result = "";
-		 $groups = array();
+	public function group_header($header){
+		if( !is_string($header) ) return false;
+		$result = "";
+		$groups = array();
 
-		 $items = explode("\n", $header);
-		 foreach($items as $i){
-			 list($k, $v) = explode(":", $i);
-			 $k = trim($k, " \t\n\r\0\x0B");
-			 $v = trim($v, " \t\n\r\0\x0B");
-			 if( !isset($groups[$k]) ) $groups[$k] = array();
-			 $groups[$k][] = $v;
-		 }
+		$items = explode("\n", $header);
+		foreach($items as $i){
+			list($k, $v) = explode(":", $i);
+			$k = trim($k, " \t\n\r\0\x0B");
+			$v = trim($v, " \t\n\r\0\x0B");
+			if( !isset($groups[$k]) ) $groups[$k] = array();
+			$groups[$k][] = $v;
+		}
 
-		 while( list($k, $v) = each($groups) ){
-			 $result .= $k.": ".implode(", ", $v)."\n";
-		 }
-		 return $result;
-	 }
+		while( list($k, $v) = each($groups) ){
+			$result .= $k.": ".implode(", ", $v)."\n";
+		}
+		return $result;
+	}
 
 	/**
 	 * @param mixed $to (string|array)
