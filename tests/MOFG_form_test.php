@@ -134,6 +134,21 @@ class MOFG_form_test extends TestCase{
 		$POST = array("_reset" => "1");
 		$Form = new MOFG_form("", $items, $POST);
 		$this->assertSame(1, $Form->settle());
+
+		$_SESSION = array();
+
+		$POST = array("name" => "Suzuki", "_enter" => "1");
+		$Form = new MOFG_form("", $items, $POST);
+		$Form->set_error("name", "Invalid");
+		$this->assertSame(1, $Form->settle());
+	}
+
+	public function test_has_error(){
+		$_SESSION = array();
+		$Form = new MOFG_form("", array("item" => array()), array("item" => "", "_enter" => "1"));
+		$this->assertFalse($Form->has_error("item"));
+		$Form->set_error("item", "Invalid");
+		$this->assertTrue($Form->has_error("item"));
 	}
 
 	/**
@@ -243,6 +258,57 @@ class MOFG_form_test extends TestCase{
 			array(array("rule" => array("minlen" => 2, "maxlen" => 4, "format" => MOFG_form::FMT_INT)), "1", MOFG_form::E_MINLEN),
 			array(array("rule" => array("minlen" => 2, "maxlen" => 4, "format" => MOFG_form::FMT_INT)), "12345", MOFG_form::E_MAXLEN),
 			array(array("rule" => array("minlen" => 2, "maxlen" => 4, "format" => MOFG_form::FMT_INT)), "abc", MOFG_form::E_FMT_INT)
+		);
+	}
+
+	/**
+	 * @dataProvider test_output_values_provider
+	 */
+	public function test_output_values($value, $expected){
+		$this->expectOutputString($expected);
+		$_SESSION = array();
+		$Form = new MOFG_form("", array(
+			"item" => array()
+		), array(
+			"item" => $value,
+			"_enter" => "1"
+		));
+		$Form->settle();
+		$Form->v("item");
+	}
+
+	public function test_output_values_provider(){
+		$str = "<a href=\"javascript:void(0)\">&nbsp;</a>";
+		return array(
+			array("foo", "foo"),
+			array($str, htmlspecialchars($str))
+		);
+	}
+
+	/**
+	 * @dataProvider test_output_custom_errors_provider
+	 */
+	public function test_output_custom_errors($error_format, $error_message, $expected){
+		$this->expectOutputString($expected);
+		$_SESSION = array();
+		$Form = new MOFG_form("", array(
+			"item" => array()
+		), array(
+			"item" => "",
+			"_enter" => "1"
+		));
+		$Form->set_error_format($error_format);
+		$Form->set_error("item", $error_message);
+		$Form->settle();
+		$Form->e("item");
+	}
+
+	public function test_output_custom_errors_provider(){
+		$str = "<a href=\"javascript:void(0)\">&nbsp;</a>";
+		return array(
+			array("%s", "foo", "foo"),
+			array("%s", $str, htmlspecialchars($str)),
+			array("<p>%s</p>", "foo", "<p>foo</p>")
 		);
 	}
 
