@@ -205,8 +205,10 @@ class MOFG_form{
 		$result = 0;
 		foreach($_SESSION[$this->space]["items"] as $k => $v){
 			if( $v["in_page"] !== $this->data["page"] ) continue;
-			if( ($e = $this->validate($k)) === self::E_NONE ) continue;
-			$this->errors[$k] = ( isset($this->data["error_message"][$e]) ) ? $this->data["error_message"][$e] : $this->data["error_message"][self::E_DEFAULT];
+			if( !isset($this->errors[$k]) ){
+				if( ($e = $this->validate($k)) === self::E_NONE ) continue;
+				$this->errors[$k] = ( isset($this->data["error_message"][$e]) ) ? $this->data["error_message"][$e] : $this->data["error_message"][self::E_DEFAULT];
+			}
 			$result++;
 		}
 		return $result;
@@ -416,7 +418,7 @@ class MOFG_form{
 	 * @return boolean
 	 */
 	public function has_error($id){
-		return ( $this->validate($id) === self::E_NONE ) ? false : true;
+		return ( $this->validate($id) === self::E_NONE && !isset($this->errors[$id]) ) ? false : true;
 	}
 
 	/**
