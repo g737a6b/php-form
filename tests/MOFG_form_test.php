@@ -246,6 +246,57 @@ class MOFG_form_test extends TestCase{
 		);
 	}
 
+	/**
+	 * @dataProvider test_output_values_provider
+	 */
+	public function test_output_values($value, $expected){
+		$this->expectOutputString($expected);
+		$_SESSION = array();
+		$Form = new MOFG_form("", array(
+			"item" => array()
+		), array(
+			"item" => $value,
+			"_enter" => "1"
+		));
+		$Form->settle();
+		$Form->v("item");
+	}
+
+	public function test_output_values_provider(){
+		$str = "<a href=\"javascript:void(0)\">&nbsp;</a>";
+		return array(
+			array("foo", "foo"),
+			array($str, htmlspecialchars($str))
+		);
+	}
+
+	/**
+	 * @dataProvider test_output_custom_errors_provider
+	 */
+	public function test_output_custom_errors($error_format, $error_message, $expected){
+		$this->expectOutputString($expected);
+		$_SESSION = array();
+		$Form = new MOFG_form("", array(
+			"item" => array()
+		), array(
+			"item" => "",
+			"_enter" => "1"
+		));
+		$Form->set_error_format($error_format);
+		$Form->set_error("item", $error_message);
+		$Form->settle();
+		$Form->e("item");
+	}
+
+	public function test_output_custom_errors_provider(){
+		$str = "<a href=\"javascript:void(0)\">&nbsp;</a>";
+		return array(
+			array("%s", "foo", "foo"),
+			array("%s", $str, htmlspecialchars($str)),
+			array("<p>%s</p>", "foo", "<p>foo</p>")
+		);
+	}
+
 	public function test_construct_text(){
 		$_SESSION = array();
 		$items = array("item_1" => array("title" => "Item 1"));
