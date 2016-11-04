@@ -134,6 +134,21 @@ class MOFG_form_test extends TestCase{
 		$POST = array("_reset" => "1");
 		$Form = new MOFG_form("", $items, $POST);
 		$this->assertSame(1, $Form->settle());
+
+		$_SESSION = array();
+
+		$POST = array("name" => "Suzuki", "_enter" => "1");
+		$Form = new MOFG_form("", $items, $POST);
+		$Form->set_error("name", "Invalid");
+		$this->assertSame(1, $Form->settle());
+	}
+
+	public function test_has_error(){
+		$_SESSION = array();
+		$Form = new MOFG_form("", array("item" => array()), array("item" => "", "_enter" => "1"));
+		$this->assertFalse($Form->has_error("item"));
+		$Form->set_error("item", "Invalid");
+		$this->assertTrue($Form->has_error("item"));
 	}
 
 	/**
