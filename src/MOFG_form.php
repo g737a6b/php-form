@@ -8,7 +8,7 @@ namespace MOFG_form;
  * @author Hiroyuki Suzuki
  * @copyright Copyright (c) 2016 Hiroyuki Suzuki mofg.net
  * @license http://opensource.org/licenses/MIT The MIT License
- * @version 2.1.0
+ * @version 2.2.0
  */
 class MOFG_form{
 	protected $space = "MOFG_form";
