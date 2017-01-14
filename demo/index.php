@@ -168,7 +168,7 @@ if( $page === 3 ){
 	<div id="footer">
 		<div><a href="https://github.com/g737a6b/php-form">Download/View Source on Github</a></div>
 		<div><a href="#">Read API Documentation</a></div>
-		<div class="copyright">(c) 2016 Hiroyuki Suzuki <a href="http://mofg.net/">mofg.net</a></div>
+		<div class="copyright">(c) 2017 Hiroyuki Suzuki <a href="https://mofg.net/">mofg.net</a></div>
 	</div><!-- #footer -->
 
 	<div id="menu">
@@ -179,7 +179,7 @@ if( $page === 3 ){
 			<h2 class="fz20 fwb mt20">Features</h2>
 			<p class="mt20">MofgForm is suited to all web forms.</p>
 			<ul class="list-01 mt20">
-				<li class="list-01__item">All basic input types (text, select, radio, checkbox, textarea)</li>
+				<li class="list-01__item">All basic input types (text, select, radio, checkbox, textarea and password)</li>
 				<li class="list-01__item">Unlimited pages</li>
 				<li class="list-01__item">Validation</li>
 				<li class="list-01__item">Filtering</li>
