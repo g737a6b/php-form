@@ -32,6 +32,7 @@ textarea{
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	border-radius: 3px;
+	-webkit-appearance: none;
 	padding: 2px 4px;
 }
 
@@ -96,6 +97,7 @@ hr{
 	display: inline-block;
 	border: none;
 	border-radius: 2px;
+	-webkit-appearance: none;
 	padding: 6px 16px;
 }
 
