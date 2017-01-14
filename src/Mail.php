@@ -1,21 +1,36 @@
 <?php
-namespace MOFG_form\Member;
+namespace MofgForm;
 
 /**
  * Mail class
  *
- * @package MOFG_form
+ * @package MofgForm
  * @author Hiroyuki Suzuki
- * @copyright Copyright (c) 2016 Hiroyuki Suzuki mofg.net
+ * @copyright Copyright (c) 2017 Hiroyuki Suzuki mofg.net
  */
 class Mail{
+	/**
+	 * @var string
+	 */
 	private $to = "";
+
+	/**
+	 * @var string
+	 */
 	private $subject = "";
+
+	/**
+	 * @var string
+	 */
 	private $body = "";
+
+	/**
+	 * @var string
+	 */
 	private $header = "";
 
-	const FORMAT_EMAIL_ADDRESS = '#\A[a-zA-Z0-9.!\#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9_\-]+(\.[a-zA-Z0-9_\-]+)+\z#';
-	const FORMAT_EMAIL_HEADER = '#\A[a-zA-Z0-9_\-]+ *: *[^:]+\z#';
+	const FORMAT_ADDRESS = '#\A[a-zA-Z0-9.!\#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9_\-]+(\.[a-zA-Z0-9_\-]+)+\z#';
+	const FORMAT_HEADER = '#\A[a-zA-Z0-9_\-]+ *: *[^:]+\z#';
 
 	/**
 	 * @param string $to (optional)
@@ -35,9 +50,9 @@ class Mail{
 		}
 
 		$result = false;
-		$to = $this->construct_data($to, ",", self::FORMAT_EMAIL_ADDRESS);
+		$to = $this->construct_data($to, ",", self::FORMAT_ADDRESS);
 		if( !empty($to) ){
-			$header = $this->construct_data($header, "\n", self::FORMAT_EMAIL_HEADER);
+			$header = $this->construct_data($header, "\n", self::FORMAT_HEADER);
 			if( empty($header) ){
 				$result = mb_send_mail($to, $subject, $body);
 			}else{
@@ -49,7 +64,7 @@ class Mail{
 	}
 
 	/**
-	 * @param mixed $data (string|array)
+	 * @param (string|array) $data
 	 * @param string $separator (optional)
 	 * @param string $pattern (optional)
 	 * @return string
@@ -80,28 +95,29 @@ class Mail{
 	public function group_header($header){
 		if( !is_string($header) ) return false;
 		$result = "";
-		$groups = array();
+		$groups = [];
 
 		$items = explode("\n", $header);
 		foreach($items as $i){
 			list($k, $v) = explode(":", $i);
 			$k = trim($k, " \t\n\r\0\x0B");
 			$v = trim($v, " \t\n\r\0\x0B");
-			if( !isset($groups[$k]) ) $groups[$k] = array();
+			if( !isset($groups[$k]) ) $groups[$k] = [];
 			$groups[$k][] = $v;
 		}
 
 		while( list($k, $v) = each($groups) ){
-			$result .= $k.": ".implode(", ", $v)."\n";
+			if( $result !== "" ) $result .= "\n";
+			$result .= $k.": ".implode(", ", $v);
 		}
 		return $result;
 	}
 
 	/**
-	 * @param mixed $to (string|array)
+	 * @param (string|array) $to
 	 */
 	public function add_to($to){
-		$add = $this->construct_data($to, ",", self::FORMAT_EMAIL_ADDRESS);
+		$add = $this->construct_data($to, ",", self::FORMAT_ADDRESS);
 		if( $add === false ) return;
 		if( !empty($this->to) && $add !== "" ) $this->to .= ",";
 		$this->to .= $add;
@@ -124,10 +140,10 @@ class Mail{
 	}
 
 	/**
-	 * @param mixed $header (string|array)
+	 * @param (string|array) $header
 	 */
 	public function add_header($header){
-		$add = $this->construct_data($header, "\n", self::FORMAT_EMAIL_HEADER);
+		$add = $this->construct_data($header, "\n", self::FORMAT_HEADER);
 		if( $add === false ) return;
 		if( !empty($this->header) && $add !== "" ) $this->header .= "\n";
 		$this->header .= $add;
@@ -135,7 +151,7 @@ class Mail{
 
 	/**
 	 * @param boolean $array (optional)
-	 * @return mixed (string|array)
+	 * @return mixed
 	 */
 	public function get_to($array = false){
 		return ( $array ) ? explode(",", $this->to) : $this->to;
@@ -157,7 +173,7 @@ class Mail{
 
 	/**
 	 * @param boolean $array (optional)
-	 * @return mixed (string|array)
+	 * @return mixed
 	 */
 	public function get_header($array = false){
 		return ( $array ) ? explode("\n", $this->header) : $this->header;

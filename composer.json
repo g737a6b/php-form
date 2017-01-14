@@ -6,7 +6,7 @@
 	"authors": [
 		{
 			"name": "Hiroyuki Suzuki",
-			"homepage": "http://mofg.net"
+			"homepage": "https://mofg.net"
 		}
 	],
 	"support": {
@@ -18,7 +18,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"MOFG_form\\": "src/"
+			"MofgForm\\": "src/"
 		}
 	}
 }
