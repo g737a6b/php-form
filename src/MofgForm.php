@@ -1,17 +1,17 @@
 <?php
-namespace MOFG_form;
+namespace MofgForm;
 
 /**
- * MOFG_form
+ * MofgForm
  *
- * @package MOFG_form
+ * @package MofgForm
  * @author Hiroyuki Suzuki
  * @copyright Copyright (c) 2016 Hiroyuki Suzuki mofg.net
  * @license http://opensource.org/licenses/MIT The MIT License
  * @version 2.2.0
  */
-class MOFG_form{
-	protected $space = "MOFG_form";
+class MofgForm{
+	protected $space = "MofgForm";
 	protected $data = array();
 	protected $values = array();
 	protected $errors = array();
@@ -87,8 +87,8 @@ class MOFG_form{
 	function __construct($session_space = "", $items = array(), $POST = array()){
 		if( is_string($session_space) && $session_space !== "" ) $this->space = $session_space;
 
-		$this->HTML = new \MOFG_form\Member\HTML($this);
-		$this->Mail = new \MOFG_form\Member\Mail();
+		$this->HTML = new \MofgForm\Member\HTML($this);
+		$this->Mail = new \MofgForm\Member\Mail();
 
 		$this->init();
 		$this->pull_data();

@@ -1,4 +1,4 @@
-# MOFG_form
+# MofgForm
 
 PHP form library.
 
@@ -8,7 +8,7 @@ See /demo.
 
 ## Features
 
-MOFG_form is suited to all web forms.
+MofgForm is suited to all web forms.
 
 - All basic input types (text, select, radio, checkbox, textarea)
 - Unlimited pages

@@ -2,13 +2,13 @@
 require(__DIR__."/../../autoload.php");
 
 use PHPUnit\Framework\TestCase;
-use MOFG_form\Member\HTML;
+use MofgForm\Member\HTML;
 
 class HTML_test extends TestCase{
 	protected $Form;
 
 	protected function setUp(){
-		$this->Form = $this->createMock(MOFG_form\MOFG_form::class);
+		$this->Form = $this->createMock(MofgForm\MofgForm::class);
 		$this->Form->method("get_value")->willReturn("foo");
 	}
 
@@ -16,7 +16,7 @@ class HTML_test extends TestCase{
 	 * @dataProvider checkbox_provider
 	 */
 	public function test_checkbox($expected, $name, $items, $attrs){
-		$HTML = new MOFG_form\Member\HTML($this->Form);
+		$HTML = new MofgForm\Member\HTML($this->Form);
 		$this->expectOutputString($expected);
 		$HTML->checkbox($name, $items, $attrs);
 	}
@@ -66,7 +66,7 @@ class HTML_test extends TestCase{
 	 * @dataProvider radio_provider
 	 */
 	public function test_radio($expected, $name, $items, $attrs){
-		$HTML = new MOFG_form\Member\HTML($this->Form);
+		$HTML = new MofgForm\Member\HTML($this->Form);
 		$this->expectOutputString($expected);
 		$HTML->radio($name, $items, $attrs);
 	}
@@ -116,7 +116,7 @@ class HTML_test extends TestCase{
 	 * @dataProvider select_provider
 	 */
 	public function test_select($expected, $name, $options, $empty, $attrs){
-		$HTML = new MOFG_form\Member\HTML($this->Form);
+		$HTML = new MofgForm\Member\HTML($this->Form);
 		$this->expectOutputString($expected);
 		$HTML->select($name, $options, $empty, $attrs);
 	}
@@ -186,7 +186,7 @@ class HTML_test extends TestCase{
 	 * @dataProvider text_provider
 	 */
 	public function test_text($expected, $name, $attrs){
-		$HTML = new MOFG_form\Member\HTML($this->Form);
+		$HTML = new MofgForm\Member\HTML($this->Form);
 		$this->expectOutputString($expected);
 		$HTML->text($name, $attrs);
 	}
@@ -210,7 +210,7 @@ class HTML_test extends TestCase{
 	 * @dataProvider password_provider
 	 */
 	public function test_password($expected, $name, $attrs){
-		$HTML = new MOFG_form\Member\HTML($this->Form);
+		$HTML = new MofgForm\Member\HTML($this->Form);
 		$this->expectOutputString($expected);
 		$HTML->password($name, $attrs);
 	}
@@ -234,7 +234,7 @@ class HTML_test extends TestCase{
 	 * @dataProvider textarea_provider
 	 */
 	public function test_textarea($expected, $name, $attrs){
-		$HTML = new MOFG_form\Member\HTML($this->Form);
+		$HTML = new MofgForm\Member\HTML($this->Form);
 		$this->expectOutputString($expected);
 		$HTML->textarea($name, $attrs);
 	}
@@ -255,7 +255,7 @@ class HTML_test extends TestCase{
 	}
 
 	public function test_get_attr_text(){
-		$HTML = new MOFG_form\Member\HTML($this->Form);
+		$HTML = new MofgForm\Member\HTML($this->Form);
 		$this->assertSame("", $HTML->get_attr_text(array()));
 		$this->assertSame(" class=\"colored\"", $HTML->get_attr_text(array("class" => "colored")));
 		$this->assertSame(" class=\"colored\" data-id=\"100\"", $HTML->get_attr_text(array("class" => "colored", "data-id" => "100")));

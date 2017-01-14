@@ -1,10 +1,10 @@
 <?php
-namespace MOFG_form\Member;
+namespace MofgForm\Member;
 
 /**
  * Mail class
  *
- * @package MOFG_form
+ * @package MofgForm
  * @author Hiroyuki Suzuki
  * @copyright Copyright (c) 2016 Hiroyuki Suzuki mofg.net
  */

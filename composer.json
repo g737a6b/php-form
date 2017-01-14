@@ -18,7 +18,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"MOFG_form\\": "src/"
+			"MofgForm\\": "src/"
 		}
 	}
 }
