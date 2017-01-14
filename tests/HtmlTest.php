@@ -22,44 +22,44 @@ class HtmlTest extends TestCase{
 	}
 
 	public function checkbox_provider(){
-		return array(
-			array(
+		return [
+			[
 				"",
 				"test",
 				[],
 				[]
-			),
-			array(
+			],
+			[
 				"<label><input type=\"checkbox\" name=\"test\" value=\"bar\" /> bar</label>",
 				"test",
 				["bar"],
 				[]
-			),
-			array(
+			],
+			[
 				"<label><input type=\"checkbox\" name=\"test\" value=\"foo\" checked=\"checked\" /> foo</label>",
 				"test",
 				["foo"],
 				[]
-			),
-			array(
+			],
+			[
 				"<label><input type=\"checkbox\" name=\"test[]\" value=\"bar\" /> bar</label><label><input type=\"checkbox\" name=\"test[]\" value=\"baz\" /> baz</label>",
 				"test",
 				["bar", "baz"],
 				[]
-			),
-			array(
+			],
+			[
 				"<label><input type=\"checkbox\" name=\"test[]\" value=\"foo\" checked=\"checked\" /> foo</label><label><input type=\"checkbox\" name=\"test[]\" value=\"bar\" /> bar</label>",
 				"test",
 				["foo", "bar"],
 				[]
-			),
-			array(
+			],
+			[
 				"<label class=\"colored\"><input type=\"checkbox\" name=\"test\" value=\"bar\" /> bar</label>",
 				"test",
 				["bar"],
 				["class" => "colored"]
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -72,44 +72,44 @@ class HtmlTest extends TestCase{
 	}
 
 	public function radio_provider(){
-		return array(
-			array(
+		return [
+			[
 				"",
 				"test",
 				[],
 				[]
-			),
-			array(
+			],
+			[
 				"<label><input type=\"radio\" name=\"test\" value=\"bar\" /> bar</label>",
 				"test",
 				["bar"],
 				[]
-			),
-			array(
+			],
+			[
 				"<label><input type=\"radio\" name=\"test\" value=\"foo\" checked=\"checked\" /> foo</label>",
 				"test",
 				["foo"],
 				[]
-			),
-			array(
+			],
+			[
 				"<label><input type=\"radio\" name=\"test\" value=\"bar\" /> bar</label><label><input type=\"radio\" name=\"test\" value=\"baz\" /> baz</label>",
 				"test",
 				["bar", "baz"],
 				[]
-			),
-			array(
+			],
+			[
 				"<label><input type=\"radio\" name=\"test\" value=\"foo\" checked=\"checked\" /> foo</label><label><input type=\"radio\" name=\"test\" value=\"bar\" /> bar</label>",
 				"test",
 				["foo", "bar"],
 				[]
-			),
-			array(
+			],
+			[
 				"<label class=\"colored\"><input type=\"radio\" name=\"test\" value=\"bar\" /> bar</label>",
 				"test",
 				["bar"],
 				["class" => "colored"]
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -122,64 +122,64 @@ class HtmlTest extends TestCase{
 	}
 
 	public function select_provider(){
-		return array(
-			array(
+		return [
+			[
 				"<select name=\"test\"></select>",
 				"test",
 				[],
 				"",
 				[]
-			),
-			array(
+			],
+			[
 				"<select name=\"test\"><option value=\"bar\">bar</option></select>",
 				"test",
 				["bar"],
 				"",
 				[]
-			),
-			array(
+			],
+			[
 				"<select name=\"test\"><option value=\"foo\" selected=\"selected\">foo</option></select>",
 				"test",
 				["foo"],
 				"",
 				[]
-			),
-			array(
+			],
+			[
 				"<select name=\"test\"><option value=\"bar\">bar</option><option value=\"baz\">baz</option></select>",
 				"test",
 				["bar", "baz"],
 				"",
 				[]
-			),
-			array(
+			],
+			[
 				"<select name=\"test\"><option value=\"foo\" selected=\"selected\">foo</option><option value=\"bar\">bar</option></select>",
 				"test",
 				["foo", "bar"],
 				"",
 				[]
-			),
-			array(
+			],
+			[
 				"<select name=\"test\"><option value=\"\">----</option></select>",
 				"test",
 				[],
 				"----",
 				[]
-			),
-			array(
+			],
+			[
 				"<select name=\"test\"><option value=\"\">----</option><option value=\"bar\">bar</option></select>",
 				"test",
 				["bar"],
 				"----",
 				[]
-			),
-			array(
+			],
+			[
 				"<select name=\"test\" class=\"colored\"></select>",
 				"test",
 				[],
 				"",
 				["class" => "colored"]
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -192,18 +192,18 @@ class HtmlTest extends TestCase{
 	}
 
 	public function text_provider(){
-		return array(
-			array(
+		return [
+			[
 				"<input type=\"text\" name=\"test\" value=\"foo\" />",
 				"test",
 				[]
-			),
-			array(
+			],
+			[
 				"<input type=\"text\" name=\"test\" value=\"foo\" class=\"colored\" />",
 				"test",
 				["class" => "colored"]
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -216,18 +216,18 @@ class HtmlTest extends TestCase{
 	}
 
 	public function password_provider(){
-		return array(
-			array(
+		return [
+			[
 				"<input type=\"password\" name=\"test\" value=\"foo\" />",
 				"test",
 				[]
-			),
-			array(
+			],
+			[
 				"<input type=\"password\" name=\"test\" value=\"foo\" class=\"colored\" />",
 				"test",
 				["class" => "colored"]
-			)
-		);
+			]
+		];
 	}
 
 	/**
@@ -240,18 +240,18 @@ class HtmlTest extends TestCase{
 	}
 
 	public function textarea_provider(){
-		return array(
-			array(
+		return [
+			[
 				"<textarea name=\"test\">foo</textarea>",
 				"test",
 				[]
-			),
-			array(
+			],
+			[
 				"<textarea name=\"test\" class=\"colored\">foo</textarea>",
 				"test",
 				["class" => "colored"]
-			)
-		);
+			]
+		];
 	}
 
 	public function test_get_attr_text(){

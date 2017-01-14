@@ -9,6 +9,9 @@ namespace MofgForm;
  * @copyright Copyright (c) 2016 Hiroyuki Suzuki mofg.net
  */
 class Html{
+	/**
+	 * @var object
+	 */
 	private $Form = null;
 
 	/**

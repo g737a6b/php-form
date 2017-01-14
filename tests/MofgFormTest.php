@@ -29,7 +29,7 @@ class MofgFormTest extends TestCase{
 		$this->assertSame($_SESSION[$sessionSpace]["items"]["tel"]["title"], "Tel");
 		$this->assertSame($_SESSION[$sessionSpace]["items"]["tel"]["required"], false);
 		$this->assertSame($_SESSION[$sessionSpace]["items"]["tel"]["rule"], ["format" => MofgForm::FMT_TEL]);
-		$this->assertSame($_SESSION[$sessionSpace]["items"]["tel"]["add"], array("before" => "(", "after" => ")"));
+		$this->assertSame($_SESSION[$sessionSpace]["items"]["tel"]["add"], ["before" => "(", "after" => ")"]);
 		$this->assertSame($_SESSION[$sessionSpace]["items"]["tel"]["filter"], [MofgForm::FLT_TRIM, MofgForm::FLT_TO_HANKAKU_ALPNUM]);
 
 		$this->assertSame($_SESSION[$sessionSpace]["items"]["zip"]["in_page"], 2);
@@ -166,7 +166,7 @@ class MofgFormTest extends TestCase{
 	}
 
 	public function validate_provider(){
-		return array(
+		return [
 			[["required" => false], "", MofgForm::E_NONE],
 			[["required" => false], [], MofgForm::E_NONE],
 			[["required" => true], "0", MofgForm::E_NONE],
@@ -258,7 +258,7 @@ class MofgFormTest extends TestCase{
 			[["rule" => ["minlen" => 2, "maxlen" => 4, "format" => MofgForm::FMT_INT]], "1", MofgForm::E_MINLEN],
 			[["rule" => ["minlen" => 2, "maxlen" => 4, "format" => MofgForm::FMT_INT]], "12345", MofgForm::E_MAXLEN],
 			[["rule" => ["minlen" => 2, "maxlen" => 4, "format" => MofgForm::FMT_INT]], "abc", MofgForm::E_FMT_INT]
-		);
+		];
 	}
 
 	/**
@@ -279,10 +279,10 @@ class MofgFormTest extends TestCase{
 
 	public function test_output_values_provider(){
 		$str = "<a href=\"javascript:void(0)\">&nbsp;</a>";
-		return array(
+		return [
 			["foo", "foo"],
-			array($str, htmlspecialchars($str))
-		);
+			[$str, htmlspecialchars($str)]
+		];
 	}
 
 	/**
@@ -305,11 +305,11 @@ class MofgFormTest extends TestCase{
 
 	public function test_output_custom_errors_provider(){
 		$str = "<a href=\"javascript:void(0)\">&nbsp;</a>";
-		return array(
+		return [
 			["%s", "foo", "foo"],
-			array("%s", $str, htmlspecialchars($str)),
+			["%s", $str, htmlspecialchars($str)],
 			["<p>%s</p>", "foo", "<p>foo</p>"]
-		);
+		];
 	}
 
 	public function test_construct_text(){
@@ -332,15 +332,15 @@ class MofgFormTest extends TestCase{
 		$this->assertSame($expected, $text);
 
 		$_SESSION = [];
-		$items = array(
-			"item_1" => array(
+		$items = [
+			"item_1" => [
 				"title" => "Item 1",
-				"add" => array(
+				"add" => [
 					"before" => "(",
 					"after" => ")"
-				),
+				],
 				"filter" => MofgForm::FLT_TRIM
-			),
+			],
 			"item_2" => [
 				"title" => "Item 2",
 				"add" => [
@@ -353,7 +353,7 @@ class MofgFormTest extends TestCase{
 			"item_3-2" => [
 				"title" => "Item 3-2"
 			]
-		);
+		];
 		$POST = [
 			"item_1" => "    foo    ",
 			"item_2" => "100",
@@ -384,28 +384,28 @@ EOD;
 	}
 
 	protected function get_sample_definition(){
-		return array(
+		return [
 			"name" => [
 				"in_page" => 1,
 				"title" => "Name",
 				"required" => true,
 				"filter" => MofgForm::FLT_TRIM
 			],
-			"tel" => array(
+			"tel" => [
 				"title" => "Tel",
 				"required" => 0,
 				"rule" => [
 					"format" => MofgForm::FMT_TEL
 				],
-				"add" => array(
+				"add" => [
 					"before" => "(",
 					"after" => ")"
-				),
+				],
 				"filter" => [
 					MofgForm::FLT_TRIM,
 					MofgForm::FLT_TO_HANKAKU_ALPNUM
 				]
-			),
+			],
 			"zip" => [
 				"in_page" => 2,
 				"title" => "Zip code",
@@ -424,6 +424,6 @@ EOD;
 				"in_page" => 2,
 				"title" => "Address"
 			]
-		);
+		];
 	}
 }

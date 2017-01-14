@@ -380,7 +380,7 @@ class MofgForm{
 
 	/**
 	 * @param string $id
-	 * @param mixed $value (string|array)
+	 * @param (string|array) $value
 	 * @return boolean
 	 */
 	public function set_value($id, $value){
@@ -391,7 +391,7 @@ class MofgForm{
 
 	/**
 	 * @param string $id
-	 * @return mixed (string|array)
+	 * @return mixed
 	 */
 	public function get_value($id){
 		if( isset($this->values[$id]) ){
@@ -496,7 +496,7 @@ class MofgForm{
 
 	/**
 	 * @param string $data
-	 * @param mixed $filter (integer|array)
+	 * @param (integer|array) $filter
 	 * @return string
 	 */
 	public function apply_filter($data, $filter){
