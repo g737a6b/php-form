@@ -2,9 +2,9 @@
 <phpunit colors="true">
 	<testsuites>
 		<testsuite name="MofgForm Test Suite">
-			<file>./tests/MofgForm_test.php</file>
-			<file>./tests/Member/Mail_test.php</file>
-			<file>./tests/Member/HTML_test.php</file>
+			<file>./tests/MofgFormTest.php</file>
+			<file>./tests/MailTest.php</file>
+			<file>./tests/HTMLTest.php</file>
 		</testsuite>
 	</testsuites>
 </phpunit>

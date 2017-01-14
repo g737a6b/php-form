@@ -1,5 +1,5 @@
 <?php
-namespace MofgForm\Member;
+namespace MofgForm;
 
 /**
  * Mail class

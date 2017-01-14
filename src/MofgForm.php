@@ -17,7 +17,7 @@ class MofgForm{
 	protected $errors = [];
 	protected $flags = [];
 
-	public $HTML = null;
+	public $Html = null;
 	public $Mail = null;
 
 	const FMT_NONE = 0;
@@ -87,8 +87,8 @@ class MofgForm{
 	function __construct($session_space = "", $items = [], $POST = []){
 		if( is_string($session_space) && $session_space !== "" ) $this->space = $session_space;
 
-		$this->HTML = new \MofgForm\Member\HTML($this);
-		$this->Mail = new \MofgForm\Member\Mail();
+		$this->Html = new Html($this);
+		$this->Mail = new Mail();
 
 		$this->init();
 		$this->pull_data();

@@ -4,47 +4,47 @@ require(__DIR__."/../autoload.php");
 use PHPUnit\Framework\TestCase;
 use MofgForm\MofgForm;
 
-class MofgForm_test extends TestCase{
+class MofgFormTest extends TestCase{
 	public function test_construct(){
 		$_SESSION = [];
 		$Form = new MofgForm();
-		$this->assertInstanceOf("\MofgForm\Member\HTML", $Form->HTML);
-		$this->assertInstanceOf("\MofgForm\Member\Mail", $Form->Mail);
+		$this->assertInstanceOf("\MofgForm\Html", $Form->Html);
+		$this->assertInstanceOf("\MofgForm\Mail", $Form->Mail);
 	}
 
 	public function test_register_items(){
 		$_SESSION = [];
-		$session_space = "test";
+		$sessionSpace = "test";
 		$items = $this->get_sample_definition();
-		$Form = new MofgForm($session_space, $items);
+		$Form = new MofgForm($sessionSpace, $items);
 
-		$this->assertSame($_SESSION[$session_space]["items"]["name"]["in_page"], 1);
-		$this->assertSame($_SESSION[$session_space]["items"]["name"]["title"], "Name");
-		$this->assertSame($_SESSION[$session_space]["items"]["name"]["required"], true);
-		$this->assertSame($_SESSION[$session_space]["items"]["name"]["rule"], []);
-		$this->assertSame($_SESSION[$session_space]["items"]["name"]["add"], []);
-		$this->assertSame($_SESSION[$session_space]["items"]["name"]["filter"], MofgForm::FLT_TRIM);
+		$this->assertSame($_SESSION[$sessionSpace]["items"]["name"]["in_page"], 1);
+		$this->assertSame($_SESSION[$sessionSpace]["items"]["name"]["title"], "Name");
+		$this->assertSame($_SESSION[$sessionSpace]["items"]["name"]["required"], true);
+		$this->assertSame($_SESSION[$sessionSpace]["items"]["name"]["rule"], []);
+		$this->assertSame($_SESSION[$sessionSpace]["items"]["name"]["add"], []);
+		$this->assertSame($_SESSION[$sessionSpace]["items"]["name"]["filter"], MofgForm::FLT_TRIM);
 
-		$this->assertSame($_SESSION[$session_space]["items"]["tel"]["in_page"], 1);
-		$this->assertSame($_SESSION[$session_space]["items"]["tel"]["title"], "Tel");
-		$this->assertSame($_SESSION[$session_space]["items"]["tel"]["required"], false);
-		$this->assertSame($_SESSION[$session_space]["items"]["tel"]["rule"], ["format" => MofgForm::FMT_TEL]);
-		$this->assertSame($_SESSION[$session_space]["items"]["tel"]["add"], array("before" => "(", "after" => ")"));
-		$this->assertSame($_SESSION[$session_space]["items"]["tel"]["filter"], [MofgForm::FLT_TRIM, MofgForm::FLT_TO_HANKAKU_ALPNUM]);
+		$this->assertSame($_SESSION[$sessionSpace]["items"]["tel"]["in_page"], 1);
+		$this->assertSame($_SESSION[$sessionSpace]["items"]["tel"]["title"], "Tel");
+		$this->assertSame($_SESSION[$sessionSpace]["items"]["tel"]["required"], false);
+		$this->assertSame($_SESSION[$sessionSpace]["items"]["tel"]["rule"], ["format" => MofgForm::FMT_TEL]);
+		$this->assertSame($_SESSION[$sessionSpace]["items"]["tel"]["add"], array("before" => "(", "after" => ")"));
+		$this->assertSame($_SESSION[$sessionSpace]["items"]["tel"]["filter"], [MofgForm::FLT_TRIM, MofgForm::FLT_TO_HANKAKU_ALPNUM]);
 
-		$this->assertSame($_SESSION[$session_space]["items"]["zip"]["in_page"], 2);
-		$this->assertSame($_SESSION[$session_space]["items"]["zip"]["title"], "Zip code");
-		$this->assertSame($_SESSION[$session_space]["items"]["zip"]["required"], false);
-		$this->assertSame($_SESSION[$session_space]["items"]["zip"]["rule"], ["pattern" => '/^[0-9]{3}-[0-9]{4}$/']);
-		$this->assertSame($_SESSION[$session_space]["items"]["zip"]["add"], ["before" => "〒"]);
-		$this->assertSame($_SESSION[$session_space]["items"]["zip"]["filter"], [MofgForm::FLT_TRIM, MofgForm::FLT_TO_HANKAKU_ALPNUM]);
+		$this->assertSame($_SESSION[$sessionSpace]["items"]["zip"]["in_page"], 2);
+		$this->assertSame($_SESSION[$sessionSpace]["items"]["zip"]["title"], "Zip code");
+		$this->assertSame($_SESSION[$sessionSpace]["items"]["zip"]["required"], false);
+		$this->assertSame($_SESSION[$sessionSpace]["items"]["zip"]["rule"], ["pattern" => '/^[0-9]{3}-[0-9]{4}$/']);
+		$this->assertSame($_SESSION[$sessionSpace]["items"]["zip"]["add"], ["before" => "〒"]);
+		$this->assertSame($_SESSION[$sessionSpace]["items"]["zip"]["filter"], [MofgForm::FLT_TRIM, MofgForm::FLT_TO_HANKAKU_ALPNUM]);
 
-		$this->assertSame($_SESSION[$session_space]["items"]["location"]["in_page"], 2);
-		$this->assertSame($_SESSION[$session_space]["items"]["location"]["title"], "Address");
-		$this->assertSame($_SESSION[$session_space]["items"]["location"]["required"], false);
-		$this->assertSame($_SESSION[$session_space]["items"]["location"]["rule"], []);
-		$this->assertSame($_SESSION[$session_space]["items"]["location"]["add"], []);
-		$this->assertSame($_SESSION[$session_space]["items"]["location"]["filter"], null);
+		$this->assertSame($_SESSION[$sessionSpace]["items"]["location"]["in_page"], 2);
+		$this->assertSame($_SESSION[$sessionSpace]["items"]["location"]["title"], "Address");
+		$this->assertSame($_SESSION[$sessionSpace]["items"]["location"]["required"], false);
+		$this->assertSame($_SESSION[$sessionSpace]["items"]["location"]["rule"], []);
+		$this->assertSame($_SESSION[$sessionSpace]["items"]["location"]["add"], []);
+		$this->assertSame($_SESSION[$sessionSpace]["items"]["location"]["filter"], null);
 	}
 
 	public function test_import_posted_data(){
@@ -288,7 +288,7 @@ class MofgForm_test extends TestCase{
 	/**
 	 * @dataProvider test_output_custom_errors_provider
 	 */
-	public function test_output_custom_errors($error_format, $error_message, $expected){
+	public function test_output_custom_errors($errorFormat, $errorMessage, $expected){
 		$this->expectOutputString($expected);
 		$_SESSION = [];
 		$Form = new MofgForm("", [
@@ -297,8 +297,8 @@ class MofgForm_test extends TestCase{
 			"item" => "",
 			"_enter" => "1"
 		]);
-		$Form->set_error_format($error_format);
-		$Form->set_error("item", $error_message);
+		$Form->set_error_format($errorFormat);
+		$Form->set_error("item", $errorMessage);
 		$Form->settle();
 		$Form->e("item");
 	}

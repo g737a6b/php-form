@@ -1,10 +1,10 @@
 <?php
-require(__DIR__."/../../autoload.php");
+require(__DIR__."/../autoload.php");
 
 use PHPUnit\Framework\TestCase;
-use MofgForm\Member\HTML;
+use MofgForm\Html;
 
-class HTML_test extends TestCase{
+class HtmlTest extends TestCase{
 	protected $Form;
 
 	protected function setUp(){
@@ -16,9 +16,9 @@ class HTML_test extends TestCase{
 	 * @dataProvider checkbox_provider
 	 */
 	public function test_checkbox($expected, $name, $items, $attrs){
-		$HTML = new MofgForm\Member\HTML($this->Form);
+		$Html = new MofgForm\Html($this->Form);
 		$this->expectOutputString($expected);
-		$HTML->checkbox($name, $items, $attrs);
+		$Html->checkbox($name, $items, $attrs);
 	}
 
 	public function checkbox_provider(){
@@ -66,9 +66,9 @@ class HTML_test extends TestCase{
 	 * @dataProvider radio_provider
 	 */
 	public function test_radio($expected, $name, $items, $attrs){
-		$HTML = new MofgForm\Member\HTML($this->Form);
+		$Html = new MofgForm\Html($this->Form);
 		$this->expectOutputString($expected);
-		$HTML->radio($name, $items, $attrs);
+		$Html->radio($name, $items, $attrs);
 	}
 
 	public function radio_provider(){
@@ -116,9 +116,9 @@ class HTML_test extends TestCase{
 	 * @dataProvider select_provider
 	 */
 	public function test_select($expected, $name, $options, $empty, $attrs){
-		$HTML = new MofgForm\Member\HTML($this->Form);
+		$Html = new MofgForm\Html($this->Form);
 		$this->expectOutputString($expected);
-		$HTML->select($name, $options, $empty, $attrs);
+		$Html->select($name, $options, $empty, $attrs);
 	}
 
 	public function select_provider(){
@@ -186,9 +186,9 @@ class HTML_test extends TestCase{
 	 * @dataProvider text_provider
 	 */
 	public function test_text($expected, $name, $attrs){
-		$HTML = new MofgForm\Member\HTML($this->Form);
+		$Html = new MofgForm\Html($this->Form);
 		$this->expectOutputString($expected);
-		$HTML->text($name, $attrs);
+		$Html->text($name, $attrs);
 	}
 
 	public function text_provider(){
@@ -210,9 +210,9 @@ class HTML_test extends TestCase{
 	 * @dataProvider password_provider
 	 */
 	public function test_password($expected, $name, $attrs){
-		$HTML = new MofgForm\Member\HTML($this->Form);
+		$Html = new MofgForm\Html($this->Form);
 		$this->expectOutputString($expected);
-		$HTML->password($name, $attrs);
+		$Html->password($name, $attrs);
 	}
 
 	public function password_provider(){
@@ -234,9 +234,9 @@ class HTML_test extends TestCase{
 	 * @dataProvider textarea_provider
 	 */
 	public function test_textarea($expected, $name, $attrs){
-		$HTML = new MofgForm\Member\HTML($this->Form);
+		$Html = new MofgForm\Html($this->Form);
 		$this->expectOutputString($expected);
-		$HTML->textarea($name, $attrs);
+		$Html->textarea($name, $attrs);
 	}
 
 	public function textarea_provider(){
@@ -255,9 +255,9 @@ class HTML_test extends TestCase{
 	}
 
 	public function test_get_attr_text(){
-		$HTML = new MofgForm\Member\HTML($this->Form);
-		$this->assertSame("", $HTML->get_attr_text([]));
-		$this->assertSame(" class=\"colored\"", $HTML->get_attr_text(["class" => "colored"]));
-		$this->assertSame(" class=\"colored\" data-id=\"100\"", $HTML->get_attr_text(["class" => "colored", "data-id" => "100"]));
+		$Html = new MofgForm\Html($this->Form);
+		$this->assertSame("", $Html->get_attr_text([]));
+		$this->assertSame(" class=\"colored\"", $Html->get_attr_text(["class" => "colored"]));
+		$this->assertSame(" class=\"colored\" data-id=\"100\"", $Html->get_attr_text(["class" => "colored", "data-id" => "100"]));
 	}
 }

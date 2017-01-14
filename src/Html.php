@@ -1,14 +1,14 @@
 <?php
-namespace MofgForm\Member;
+namespace MofgForm;
 
 /**
- * HTML class
+ * Html class
  *
  * @package MofgForm
  * @author Hiroyuki Suzuki
  * @copyright Copyright (c) 2016 Hiroyuki Suzuki mofg.net
  */
-class HTML{
+class Html{
 	private $Form = null;
 
 	/**

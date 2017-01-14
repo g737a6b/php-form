@@ -1,12 +1,12 @@
 <?php
-require(__DIR__."/../../autoload.php");
+require(__DIR__."/../autoload.php");
 
 use PHPUnit\Framework\TestCase;
-use MofgForm\Member\Mail;
+use MofgForm\Mail;
 
-class Mail_test extends TestCase{
+class MailTest extends TestCase{
 	public function test_construct_data(){
-		$Mail = new MofgForm\Member\Mail();
+		$Mail = new MofgForm\Mail();
 
 		$email = "abc@example.com";
 		$data = $Mail->construct_data($email, ", ", Mail::FORMAT_EMAIL_ADDRESS);
@@ -32,7 +32,7 @@ class Mail_test extends TestCase{
 	 * @dataProvider group_header_provider
 	 */
 	public function test_group_header($expected, $header){
-		$Mail = new MofgForm\Member\Mail();
+		$Mail = new MofgForm\Mail();
 		$this->assertSame($expected, rtrim($Mail->group_header($header), "\n"));
 	}
 

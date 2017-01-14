@@ -1,5 +1,5 @@
 <?php
-use \MofgForm\MofgForm;
+use MofgForm\MofgForm;
 
 mb_internal_encoding("UTF-8");
 mb_language("Japanese");
@@ -52,11 +52,11 @@ $Form->set_error_message([
 $page = $Form->settle();
 
 if( $page === 3 ){
-	$to_string = $Form->construct_text();
+	$toString = $Form->construct_text();
 
 	$Form->Mail->add_to("YOUR EMAIL ADDRESS");
 	$Form->Mail->set_subject("MofgForm Submitted");
-	$Form->Mail->set_body("MofgForm Submitted\n\n--------\n\n{$to_string}");
+	$Form->Mail->set_body("MofgForm Submitted\n\n--------\n\n{$toString}");
 	$Form->Mail->add_header("From: noreply@example.com");
 	$Form->Mail->send();
 
@@ -89,7 +89,7 @@ if( $page === 3 ){
 <?php if( $page === 3 ): ?>
 			<p class="mt20">Submitted.</p>
 			<div class="mt20">
-				<pre class="text-preview"><?php echo htmlspecialchars($to_string); ?></pre>
+				<pre class="text-preview"><?php echo htmlspecialchars($toString); ?></pre>
 				<p class="tac mt20"><a href="./">Try again</a></p>
 			</div>
 <?php elseif( $page === 2 ): ?>
@@ -124,31 +124,31 @@ if( $page === 3 ){
 				<dl class="form-table">
 					<dt class="form-table__t required">Text</dt>
 					<dd class="form-table__d">
-						<?php $Form->HTML->text("item_text", ["style" => "width:200px;"]); ?>
+						<?php $Form->Html->text("item_text", ["style" => "width:200px;"]); ?>
 						<?php $Form->e("item_text"); ?>
 					</dd>
 
 					<dt class="form-table__t required">Select</dt>
 					<dd class="form-table__d">
-						<?php $Form->HTML->select("item_select", ["foo", "bar", "baz", "qux"], "----", ["style" => "width:200px;"]); ?>
+						<?php $Form->Html->select("item_select", ["foo", "bar", "baz", "qux"], "----", ["style" => "width:200px;"]); ?>
 						<?php $Form->e("item_select"); ?>
 					</dd>
 
 					<dt class="form-table__t required">Radio</dt>
 					<dd class="form-table__d">
-						<?php $Form->HTML->radio("item_radio", ["foo", "bar", "baz", "qux"], ["style" => "margin-right:20px;"]); ?>
+						<?php $Form->Html->radio("item_radio", ["foo", "bar", "baz", "qux"], ["style" => "margin-right:20px;"]); ?>
 						<?php $Form->e("item_radio"); ?>
 					</dd>
 
 					<dt class="form-table__t required">Checkbox</dt>
 					<dd class="form-table__d">
-						<?php $Form->HTML->checkbox("item_checkbox", ["foo", "bar", "baz", "qux"], ["style" => "margin-right:20px;"]); ?>
+						<?php $Form->Html->checkbox("item_checkbox", ["foo", "bar", "baz", "qux"], ["style" => "margin-right:20px;"]); ?>
 						<?php $Form->e("item_checkbox"); ?>
 					</dd>
 
 					<dt class="form-table__t">Textarea</dt>
 					<dd class="form-table__d">
-						<?php $Form->HTML->textarea("item_textarea", ["style" => "width:100%;", "rows" => "6"]); ?>
+						<?php $Form->Html->textarea("item_textarea", ["style" => "width:100%;", "rows" => "6"]); ?>
 						<?php $Form->e("item_textarea"); ?>
 					</dd>
 				</dl>
