@@ -6,9 +6,9 @@ namespace MofgForm;
  *
  * @package MofgForm
  * @author Hiroyuki Suzuki
- * @copyright Copyright (c) 2016 Hiroyuki Suzuki mofg.net
+ * @copyright Copyright (c) 2017 Hiroyuki Suzuki mofg.net
  * @license http://opensource.org/licenses/MIT The MIT License
- * @version 2.2.0
+ * @version 3.0.0
  */
 class MofgForm{
 	protected $space = "MofgForm";

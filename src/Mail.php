@@ -6,7 +6,7 @@ namespace MofgForm;
  *
  * @package MofgForm
  * @author Hiroyuki Suzuki
- * @copyright Copyright (c) 2016 Hiroyuki Suzuki mofg.net
+ * @copyright Copyright (c) 2017 Hiroyuki Suzuki mofg.net
  */
 class Mail{
 	/**
