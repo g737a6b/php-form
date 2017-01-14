@@ -1,23 +1,23 @@
 <?php
-namespace MOFG_form;
+namespace MofgForm;
 
 /**
- * MOFG_form
+ * MofgForm
  *
- * @package MOFG_form
+ * @package MofgForm
  * @author Hiroyuki Suzuki
  * @copyright Copyright (c) 2016 Hiroyuki Suzuki mofg.net
  * @license http://opensource.org/licenses/MIT The MIT License
  * @version 2.2.0
  */
-class MOFG_form{
-	protected $space = "MOFG_form";
-	protected $data = array();
-	protected $values = array();
-	protected $errors = array();
-	protected $flags = array();
+class MofgForm{
+	protected $space = "MofgForm";
+	protected $data = [];
+	protected $values = [];
+	protected $errors = [];
+	protected $flags = [];
 
-	public $HTML = null;
+	public $Html = null;
 	public $Mail = null;
 
 	const FMT_NONE = 0;
@@ -84,11 +84,11 @@ class MOFG_form{
 	 * @param array $items (optional)
 	 * @param array $POST (optional)
 	 */
-	function __construct($session_space = "", $items = array(), $POST = array()){
+	function __construct($session_space = "", $items = [], $POST = []){
 		if( is_string($session_space) && $session_space !== "" ) $this->space = $session_space;
 
-		$this->HTML = new \MOFG_form\Member\HTML($this);
-		$this->Mail = new \MOFG_form\Member\Mail();
+		$this->Html = new Html($this);
+		$this->Mail = new Mail();
 
 		$this->init();
 		$this->pull_data();
@@ -111,7 +111,7 @@ class MOFG_form{
 	protected function init(){
 		$this->data["page"] = 1;
 		$this->data["error_format"] = "<p style=\"color:#f00;\">%s</p>";
-		$this->data["error_message"] = array(self::E_DEFAULT => "Invalid value");
+		$this->data["error_message"] = [self::E_DEFAULT => "Invalid value"];
 		$this->data["array_glue"] = ", ";
 		$this->data["name_for_enter"] = "_enter";
 		$this->data["name_for_back"] = "_back";
@@ -146,8 +146,8 @@ class MOFG_form{
 		$_SESSION[$this->space]["items"][$id]["in_page"] = ( isset($options["in_page"]) && is_numeric($options["in_page"]) ) ? intval($options["in_page"]) : 1;
 		$_SESSION[$this->space]["items"][$id]["title"] = ( isset($options["title"]) && is_string($options["title"]) ) ? $options["title"] : "";
 		$_SESSION[$this->space]["items"][$id]["required"] = ( !empty($options["required"]) ) ? true : false;
-		$_SESSION[$this->space]["items"][$id]["rule"] = ( isset($options["rule"]) && is_array($options["rule"]) ) ? $options["rule"] : array();
-		$_SESSION[$this->space]["items"][$id]["add"] = ( isset($options["add"]) && is_array($options["add"]) ) ? $options["add"] : array();
+		$_SESSION[$this->space]["items"][$id]["rule"] = ( isset($options["rule"]) && is_array($options["rule"]) ) ? $options["rule"] : [];
+		$_SESSION[$this->space]["items"][$id]["add"] = ( isset($options["add"]) && is_array($options["add"]) ) ? $options["add"] : [];
 		$_SESSION[$this->space]["items"][$id]["filter"] = ( isset($options["filter"]) && ( is_numeric($options["filter"]) || is_array($options["filter"]) ) ) ? $options["filter"] : null;
 	}
 
@@ -156,7 +156,7 @@ class MOFG_form{
 	 * @param array $POST (optional)
 	 * @return boolean
 	 */
-	protected function import_posted_data($POST = array()){
+	protected function import_posted_data($POST = []){
 		if( empty($POST) || empty($_SESSION[$this->space]["items"]) ) return false;
 		if( !empty($POST[$this->data["name_for_enter"]]) || !empty($POST[$this->data["name_for_enter"]."_x"]) ) $this->flags["enter"] = true;
 		if( !empty($POST[$this->data["name_for_back"]]) || !empty($POST[$this->data["name_for_back"]."_x"]) ) $this->flags["back"] = true;
@@ -173,9 +173,9 @@ class MOFG_form{
 	}
 
 	public function end_clean(){
-		$_SESSION[$this->space] = array();
-		$this->values = array();
-		$this->errors = array();
+		$_SESSION[$this->space] = [];
+		$this->values = [];
+		$this->errors = [];
 	}
 
 	/**
@@ -224,7 +224,7 @@ class MOFG_form{
 
 		if( $i["in_page"] !== $this->data["page"] ) return self::E_NONE;
 
-		if( !isset($this->values[$id]) || $this->values[$id] === "" || $this->values[$id] === array() ){
+		if( !isset($this->values[$id]) || $this->values[$id] === "" || $this->values[$id] === [] ){
 			if( $i["required"] ) return self::E_REQUIRED;
 			return self::E_NONE;
 		}
@@ -298,13 +298,13 @@ class MOFG_form{
 	 * @param string $separator (optional)
 	 */
 	public function register_group($id, $title, $items, $separator = ""){
-		if( is_string($items) || is_numeric($items) ) $items = array($items);
-		if( !is_array($items) ) $items = array();
-		$_SESSION[$this->space]["groups"][$id] = array(
+		if( is_string($items) || is_numeric($items) ) $items = [$items];
+		if( !is_array($items) ) $items = [];
+		$_SESSION[$this->space]["groups"][$id] = [
 			"title" => $title,
 			"items" => $items,
 			"separator" => $separator
-		);
+		];
 	}
 
 	/**
@@ -351,7 +351,7 @@ class MOFG_form{
 	 * @return string
 	 */
 	public function get_name_for($control){
-		if( !in_array($control, array(self::CTL_ENTER, self::CTL_BACK, self::CTL_RESET), true) ) return "";
+		if( !in_array($control, [self::CTL_ENTER, self::CTL_BACK, self::CTL_RESET], true) ) return "";
 		return $this->data["name_for_".$control];
 	}
 
@@ -361,7 +361,7 @@ class MOFG_form{
 	 * @return boolean
 	 */
 	public function set_name_for($control, $name){
-		if( !in_array($control, array(self::CTL_ENTER, self::CTL_BACK, self::CTL_RESET), true) ) return false;
+		if( !in_array($control, [self::CTL_ENTER, self::CTL_BACK, self::CTL_RESET], true) ) return false;
 		$this->data["name_for_".$control] = $name;
 		$this->flags["updated_data"] = true;
 		return true;
@@ -380,7 +380,7 @@ class MOFG_form{
 
 	/**
 	 * @param string $id
-	 * @param mixed $value (string|array)
+	 * @param (string|array) $value
 	 * @return boolean
 	 */
 	public function set_value($id, $value){
@@ -391,7 +391,7 @@ class MOFG_form{
 
 	/**
 	 * @param string $id
-	 * @return mixed (string|array)
+	 * @return mixed
 	 */
 	public function get_value($id){
 		if( isset($this->values[$id]) ){
@@ -452,8 +452,8 @@ class MOFG_form{
 	 * @return string
 	 */
 	public function construct_text($title_open = "[", $title_close = "]\n", $separator = "\n\n"){
-		$items = ( !empty($_SESSION[$this->space]["items"]) ) ? $_SESSION[$this->space]["items"] : array();
-		$groups = ( !empty($_SESSION[$this->space]["groups"]) ) ? $_SESSION[$this->space]["groups"] : array();
+		$items = ( !empty($_SESSION[$this->space]["items"]) ) ? $_SESSION[$this->space]["items"] : [];
+		$groups = ( !empty($_SESSION[$this->space]["groups"]) ) ? $_SESSION[$this->space]["groups"] : [];
 
 		$result = "";
 		while( list($k, $v) = each($items) ){
@@ -465,14 +465,14 @@ class MOFG_form{
 				$result .= $title_open.$gv["title"].$title_close;
 				for($i = 0; $i < count($gv["items"]); $i++){
 					$item = $gv["items"][$i];
-					if( isset($items[$item]["value"]) && $items[$item]["value"] !== "" && $items[$item]["value"] !== array() ){
+					if( isset($items[$item]["value"]) && $items[$item]["value"] !== "" && $items[$item]["value"] !== [] ){
 						if( is_array($items[$item]["value"]) ) $items[$item]["value"] = implode($this->data["array_glue"], $items[$item]["value"]);
 						if( isset($items[$item]["add"]["before"]) ) $result .= $items[$item]["add"]["before"];
 						$result .= $items[$item]["value"];
 						if( isset($items[$item]["add"]["after"]) ) $result .= $items[$item]["add"]["after"];
 					}
 					$result .= $gv["separator"];
-					if( isset($items[$item]) ) $items[$item] = array();
+					if( isset($items[$item]) ) $items[$item] = [];
 				}
 				unset($groups[$gk]);
 				if( ($seplen = mb_strlen($gv["separator"])) > 0 ) $result = mb_substr($result, 0, -$seplen);
@@ -481,7 +481,7 @@ class MOFG_form{
 			}
 
 			$result .= $title_open.$v["title"].$title_close;
-			if( isset($v["value"]) && $v["value"] !== "" && $v["value"] !== array() ){
+			if( isset($v["value"]) && $v["value"] !== "" && $v["value"] !== [] ){
 				if( is_array($v["value"]) ) $v["value"] = implode($this->data["array_glue"], $v["value"]);
 				if( isset($v["add"]["before"]) ) $result .= $v["add"]["before"];
 				$result .= $v["value"];
@@ -496,7 +496,7 @@ class MOFG_form{
 
 	/**
 	 * @param string $data
-	 * @param mixed $filter (integer|array)
+	 * @param (integer|array) $filter
 	 * @return string
 	 */
 	public function apply_filter($data, $filter){
@@ -520,10 +520,10 @@ class MOFG_form{
 					$result = strtolower($result);
 					break;
 				case self::FLT_EOL_TO_N:
-					$result = str_replace(array("\r\n", "\r"), "\n", $result);
+					$result = str_replace(["\r\n", "\r"], "\n", $result);
 					break;
 				case self::FLT_EOL_TO_SPACE:
-					$result = str_replace(array("\r\n", "\r", "\n"), " ", $result);
+					$result = str_replace(["\r\n", "\r", "\n"], " ", $result);
 					break;
 				case self::FLT_TRIM:
 					$result = trim($result);

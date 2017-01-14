@@ -1,6 +1,6 @@
 <?php
 spl_autoload_register(function($class){
-	$prefix = "MOFG_form\\";
+	$prefix = "MofgForm\\";
 	$base_dir = __DIR__."/src/";
 	$len = strlen($prefix);
 	if( strncmp($prefix, $class, $len) !== 0 ) return;

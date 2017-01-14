@@ -1,4 +1,4 @@
-# MOFG_form
+# MofgForm
 
 PHP form library.
 
@@ -8,9 +8,9 @@ See /demo.
 
 ## Features
 
-MOFG_form is suited to all web forms.
+MofgForm is suited to all web forms.
 
-- All basic input types (text, select, radio, checkbox, textarea)
+- All basic input types (text, select, radio, checkbox, textarea and password)
 - Unlimited pages
 - Validation
 - Filtering
@@ -45,4 +45,4 @@ Add a dependency to your project's `composer.json` file.
 
 [The MIT License](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2016 [Hiroyuki Suzuki](http://mofg.net)
+Copyright (c) 2017 [Hiroyuki Suzuki](https://mofg.net)

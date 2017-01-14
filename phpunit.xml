@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit colors="true">
 	<testsuites>
-		<testsuite name="MOFG_form Test Suite">
-			<file>./tests/MOFG_form_test.php</file>
-			<file>./tests/Member/Mail_test.php</file>
-			<file>./tests/Member/HTML_test.php</file>
+		<testsuite name="MofgForm Test Suite">
+			<file>./tests/MofgFormTest.php</file>
+			<file>./tests/MailTest.php</file>
+			<file>./tests/HTMLTest.php</file>
 		</testsuite>
 	</testsuites>
 </phpunit>

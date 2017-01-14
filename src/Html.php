@@ -1,14 +1,17 @@
 <?php
-namespace MOFG_form\Member;
+namespace MofgForm;
 
 /**
- * HTML class
+ * Html class
  *
- * @package MOFG_form
+ * @package MofgForm
  * @author Hiroyuki Suzuki
  * @copyright Copyright (c) 2016 Hiroyuki Suzuki mofg.net
  */
-class HTML{
+class Html{
+	/**
+	 * @var object
+	 */
 	private $Form = null;
 
 	/**
@@ -23,12 +26,12 @@ class HTML{
 	 * @param array $items
 	 * @param array $attrs (optional)
 	 */
-	public function checkbox($name, $items, $attrs = array()){
-		if( is_string($items) ) $items = array($items);
+	public function checkbox($name, $items, $attrs = []){
+		if( is_string($items) ) $items = [$items];
 		if( !is_array($items) ) return;
 		$out = "";
 		$data = $this->Form->get_value(str_replace("[]", "", $name));
-		if( !is_array($data) ) $data = array($data);
+		if( !is_array($data) ) $data = [$data];
 		$attr_txt = $this->get_attr_text($attrs);
 		foreach($items as $i){
 			if( !is_string($i) ) continue;
@@ -45,8 +48,8 @@ class HTML{
 	 * @param array $items
 	 * @param array $attrs (optional)
 	 */
-	public function radio($name, $items, $attrs = array()){
-		if( is_string($items) ) $items = array($items);
+	public function radio($name, $items, $attrs = []){
+		if( is_string($items) ) $items = [$items];
 		if( !is_array($items) ) return;
 		$out = "";
 		$data = $this->Form->get_value($name);
@@ -66,8 +69,8 @@ class HTML{
 	 * @param string $empty (optional)
 	 * @param array $attrs (optional)
 	 */
-	public function select($name, $options, $empty = "", $attrs = array()){
-		if( is_string($options) ) $options = array($options);
+	public function select($name, $options, $empty = "", $attrs = []){
+		if( is_string($options) ) $options = [$options];
 		if( !is_array($options) ) return;
 		$attr_txt = $this->get_attr_text($attrs);
 		$out = "<select name=\"".htmlspecialchars($name)."\"{$attr_txt}>";
@@ -88,7 +91,7 @@ class HTML{
 	 * @param string $name
 	 * @param array $attrs (optional)
 	 */
-	public function text($name, $attrs = array()){
+	public function text($name, $attrs = []){
 		$attr_txt = $this->get_attr_text($attrs);
 		$data = $this->Form->get_value($name);
 		$data = ( is_string($data) ) ? htmlspecialchars($data) : "";
@@ -99,7 +102,7 @@ class HTML{
 	 * @param string $name
 	 * @param array $attrs (optional)
 	 */
-	public function password($name, $attrs = array()){
+	public function password($name, $attrs = []){
 		$attr_txt = $this->get_attr_text($attrs);
 		$data = $this->Form->get_value($name);
 		$data = ( is_string($data) ) ? htmlspecialchars($data) : "";
@@ -110,7 +113,7 @@ class HTML{
 	 * @param string $name
 	 * @param array $attrs (optional)
 	 */
-	public function textarea($name, $attrs = array()){
+	public function textarea($name, $attrs = []){
 		$attr_txt = $this->get_attr_text($attrs);
 		$data = $this->Form->get_value($name);
 		$data = ( is_string($data) ) ? htmlspecialchars($data) : "";
@@ -121,7 +124,7 @@ class HTML{
 	 * @param array $attrs (optional)
 	 * @return string
 	 */
-	public function get_attr_text($attrs = array()){
+	public function get_attr_text($attrs = []){
 		$result = "";
 		if( !empty($attrs) && is_array($attrs) ){
 			foreach($attrs as $k => $v){
