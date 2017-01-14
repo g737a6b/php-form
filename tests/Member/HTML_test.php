@@ -26,38 +26,38 @@ class HTML_test extends TestCase{
 			array(
 				"",
 				"test",
-				array(),
-				array()
+				[],
+				[]
 			),
 			array(
 				"<label><input type=\"checkbox\" name=\"test\" value=\"bar\" /> bar</label>",
 				"test",
-				array("bar"),
-				array()
+				["bar"],
+				[]
 			),
 			array(
 				"<label><input type=\"checkbox\" name=\"test\" value=\"foo\" checked=\"checked\" /> foo</label>",
 				"test",
-				array("foo"),
-				array()
+				["foo"],
+				[]
 			),
 			array(
 				"<label><input type=\"checkbox\" name=\"test[]\" value=\"bar\" /> bar</label><label><input type=\"checkbox\" name=\"test[]\" value=\"baz\" /> baz</label>",
 				"test",
-				array("bar", "baz"),
-				array()
+				["bar", "baz"],
+				[]
 			),
 			array(
 				"<label><input type=\"checkbox\" name=\"test[]\" value=\"foo\" checked=\"checked\" /> foo</label><label><input type=\"checkbox\" name=\"test[]\" value=\"bar\" /> bar</label>",
 				"test",
-				array("foo", "bar"),
-				array()
+				["foo", "bar"],
+				[]
 			),
 			array(
 				"<label class=\"colored\"><input type=\"checkbox\" name=\"test\" value=\"bar\" /> bar</label>",
 				"test",
-				array("bar"),
-				array("class" => "colored")
+				["bar"],
+				["class" => "colored"]
 			)
 		);
 	}
@@ -76,38 +76,38 @@ class HTML_test extends TestCase{
 			array(
 				"",
 				"test",
-				array(),
-				array()
+				[],
+				[]
 			),
 			array(
 				"<label><input type=\"radio\" name=\"test\" value=\"bar\" /> bar</label>",
 				"test",
-				array("bar"),
-				array()
+				["bar"],
+				[]
 			),
 			array(
 				"<label><input type=\"radio\" name=\"test\" value=\"foo\" checked=\"checked\" /> foo</label>",
 				"test",
-				array("foo"),
-				array()
+				["foo"],
+				[]
 			),
 			array(
 				"<label><input type=\"radio\" name=\"test\" value=\"bar\" /> bar</label><label><input type=\"radio\" name=\"test\" value=\"baz\" /> baz</label>",
 				"test",
-				array("bar", "baz"),
-				array()
+				["bar", "baz"],
+				[]
 			),
 			array(
 				"<label><input type=\"radio\" name=\"test\" value=\"foo\" checked=\"checked\" /> foo</label><label><input type=\"radio\" name=\"test\" value=\"bar\" /> bar</label>",
 				"test",
-				array("foo", "bar"),
-				array()
+				["foo", "bar"],
+				[]
 			),
 			array(
 				"<label class=\"colored\"><input type=\"radio\" name=\"test\" value=\"bar\" /> bar</label>",
 				"test",
-				array("bar"),
-				array("class" => "colored")
+				["bar"],
+				["class" => "colored"]
 			)
 		);
 	}
@@ -126,58 +126,58 @@ class HTML_test extends TestCase{
 			array(
 				"<select name=\"test\"></select>",
 				"test",
-				array(),
+				[],
 				"",
-				array()
+				[]
 			),
 			array(
 				"<select name=\"test\"><option value=\"bar\">bar</option></select>",
 				"test",
-				array("bar"),
+				["bar"],
 				"",
-				array()
+				[]
 			),
 			array(
 				"<select name=\"test\"><option value=\"foo\" selected=\"selected\">foo</option></select>",
 				"test",
-				array("foo"),
+				["foo"],
 				"",
-				array()
+				[]
 			),
 			array(
 				"<select name=\"test\"><option value=\"bar\">bar</option><option value=\"baz\">baz</option></select>",
 				"test",
-				array("bar", "baz"),
+				["bar", "baz"],
 				"",
-				array()
+				[]
 			),
 			array(
 				"<select name=\"test\"><option value=\"foo\" selected=\"selected\">foo</option><option value=\"bar\">bar</option></select>",
 				"test",
-				array("foo", "bar"),
+				["foo", "bar"],
 				"",
-				array()
+				[]
 			),
 			array(
 				"<select name=\"test\"><option value=\"\">----</option></select>",
 				"test",
-				array(),
+				[],
 				"----",
-				array()
+				[]
 			),
 			array(
 				"<select name=\"test\"><option value=\"\">----</option><option value=\"bar\">bar</option></select>",
 				"test",
-				array("bar"),
+				["bar"],
 				"----",
-				array()
+				[]
 			),
 			array(
 				"<select name=\"test\" class=\"colored\"></select>",
 				"test",
-				array(),
+				[],
 				"",
-				array("class" => "colored")
+				["class" => "colored"]
 			)
 		);
 	}
@@ -196,12 +196,12 @@ class HTML_test extends TestCase{
 			array(
 				"<input type=\"text\" name=\"test\" value=\"foo\" />",
 				"test",
-				array()
+				[]
 			),
 			array(
 				"<input type=\"text\" name=\"test\" value=\"foo\" class=\"colored\" />",
 				"test",
-				array("class" => "colored")
+				["class" => "colored"]
 			)
 		);
 	}
@@ -220,12 +220,12 @@ class HTML_test extends TestCase{
 			array(
 				"<input type=\"password\" name=\"test\" value=\"foo\" />",
 				"test",
-				array()
+				[]
 			),
 			array(
 				"<input type=\"password\" name=\"test\" value=\"foo\" class=\"colored\" />",
 				"test",
-				array("class" => "colored")
+				["class" => "colored"]
 			)
 		);
 	}
@@ -244,20 +244,20 @@ class HTML_test extends TestCase{
 			array(
 				"<textarea name=\"test\">foo</textarea>",
 				"test",
-				array()
+				[]
 			),
 			array(
 				"<textarea name=\"test\" class=\"colored\">foo</textarea>",
 				"test",
-				array("class" => "colored")
+				["class" => "colored"]
 			)
 		);
 	}
 
 	public function test_get_attr_text(){
 		$HTML = new MofgForm\Member\HTML($this->Form);
-		$this->assertSame("", $HTML->get_attr_text(array()));
-		$this->assertSame(" class=\"colored\"", $HTML->get_attr_text(array("class" => "colored")));
-		$this->assertSame(" class=\"colored\" data-id=\"100\"", $HTML->get_attr_text(array("class" => "colored", "data-id" => "100")));
+		$this->assertSame("", $HTML->get_attr_text([]));
+		$this->assertSame(" class=\"colored\"", $HTML->get_attr_text(["class" => "colored"]));
+		$this->assertSame(" class=\"colored\" data-id=\"100\"", $HTML->get_attr_text(["class" => "colored", "data-id" => "100"]));
 	}
 }

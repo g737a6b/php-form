@@ -8,46 +8,46 @@ require(__DIR__."/../autoload.php");
 
 if( !session_id() ) session_start();
 
-$items = array(
-	"item_text" => array(
+$items = [
+	"item_text" => [
 		"in_page" => 1,
 		"title" => "Text",
-		"rule" => array(
+		"rule" => [
 			"format" => MofgForm::FMT_ALPNUM
-		),
-		"filter" => array(
+		],
+		"filter" => [
 			MofgForm::FLT_TRIM,
 			MofgForm::FLT_TO_HANKAKU_ALPNUM
-		),
+		],
 		"required" => true
-	),
-	"item_select" => array(
+	],
+	"item_select" => [
 		"in_page" => 1,
 		"title" => "Select",
 		"required" => true
-	),
-	"item_radio" => array(
+	],
+	"item_radio" => [
 		"in_page" => 1,
 		"title" => "Radio",
 		"required" => true
-	),
-	"item_checkbox" => array(
+	],
+	"item_checkbox" => [
 		"in_page" => 1,
 		"title" => "Checkbox",
 		"required" => true
-	),
-	"item_textarea" => array(
+	],
+	"item_textarea" => [
 		"in_page" => 1,
 		"title" => "Textarea"
-	)
-);
+	]
+];
 
-$Form = new MofgForm("form_demo", $items, $_POST);
+$Form = new MofgForm("demo", $items, $_POST);
 
-$Form->set_error_message(array(
+$Form->set_error_message([
 	MofgForm::E_REQUIRED => "Required",
 	MofgForm::E_FMT_ALPNUM => "Alphanumeric only"
-));
+]);
 
 $page = $Form->settle();
 
@@ -124,31 +124,31 @@ if( $page === 3 ){
 				<dl class="form-table">
 					<dt class="form-table__t required">Text</dt>
 					<dd class="form-table__d">
-						<?php $Form->HTML->text("item_text", array("style" => "width:200px;")); ?>
+						<?php $Form->HTML->text("item_text", ["style" => "width:200px;"]); ?>
 						<?php $Form->e("item_text"); ?>
 					</dd>
 
 					<dt class="form-table__t required">Select</dt>
 					<dd class="form-table__d">
-						<?php $Form->HTML->select("item_select", array("foo", "bar", "baz", "qux"), "----", array("style" => "width:200px;")); ?>
+						<?php $Form->HTML->select("item_select", ["foo", "bar", "baz", "qux"], "----", ["style" => "width:200px;"]); ?>
 						<?php $Form->e("item_select"); ?>
 					</dd>
 
 					<dt class="form-table__t required">Radio</dt>
 					<dd class="form-table__d">
-						<?php $Form->HTML->radio("item_radio", array("foo", "bar", "baz", "qux"), array("style" => "margin-right:20px;")); ?>
+						<?php $Form->HTML->radio("item_radio", ["foo", "bar", "baz", "qux"], ["style" => "margin-right:20px;"]); ?>
 						<?php $Form->e("item_radio"); ?>
 					</dd>
 
 					<dt class="form-table__t required">Checkbox</dt>
 					<dd class="form-table__d">
-						<?php $Form->HTML->checkbox("item_checkbox", array("foo", "bar", "baz", "qux"), array("style" => "margin-right:20px;")); ?>
+						<?php $Form->HTML->checkbox("item_checkbox", ["foo", "bar", "baz", "qux"], ["style" => "margin-right:20px;"]); ?>
 						<?php $Form->e("item_checkbox"); ?>
 					</dd>
 
 					<dt class="form-table__t">Textarea</dt>
 					<dd class="form-table__d">
-						<?php $Form->HTML->textarea("item_textarea", array("style" => "width:100%;", "rows" => "6")); ?>
+						<?php $Form->HTML->textarea("item_textarea", ["style" => "width:100%;", "rows" => "6"]); ?>
 						<?php $Form->e("item_textarea"); ?>
 					</dd>
 				</dl>

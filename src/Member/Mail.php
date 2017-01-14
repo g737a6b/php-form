@@ -80,14 +80,14 @@ class Mail{
 	public function group_header($header){
 		if( !is_string($header) ) return false;
 		$result = "";
-		$groups = array();
+		$groups = [];
 
 		$items = explode("\n", $header);
 		foreach($items as $i){
 			list($k, $v) = explode(":", $i);
 			$k = trim($k, " \t\n\r\0\x0B");
 			$v = trim($v, " \t\n\r\0\x0B");
-			if( !isset($groups[$k]) ) $groups[$k] = array();
+			if( !isset($groups[$k]) ) $groups[$k] = [];
 			$groups[$k][] = $v;
 		}
 
