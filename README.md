@@ -29,12 +29,6 @@ Add a dependency to your project's `composer.json` file.
 
 ```json
 {
-	"repositories": [
-		{
-			"type": "vcs",
-			"url": "https://github.com/g737a6b/php-form.git"
-		}
-	],
 	"require": {
 		"g737a6b/php-form": "*"
 	}
