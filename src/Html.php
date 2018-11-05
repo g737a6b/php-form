@@ -33,12 +33,14 @@ class Html{
 		$data = $this->Form->get_value(str_replace("[]", "", $name));
 		if( !is_array($data) ) $data = [$data];
 		$attr_txt = $this->get_attr_text($attrs);
-		foreach($items as $i){
-			if( !is_string($i) ) continue;
-			$checked = ( in_array($i, $data, true) ) ? " checked=\"checked\"" : "";
+		foreach($items as $k => $v){
+			if( !is_string($v) ) continue;
+			if( is_int($k) ) $k = $v;
+			$checked = ( in_array($k, $data, true) ) ? " checked=\"checked\"" : "";
 			$brackets = ( count($items) > 1 ) ? "[]" : "";
-			$i = htmlspecialchars($i);
-			$out .= "<label{$attr_txt}><input type=\"checkbox\" name=\"{$name}{$brackets}\" value=\"{$i}\"{$checked} /> {$i}</label>";
+			$k = htmlspecialchars($k);
+			$v = htmlspecialchars($v);
+			$out .= "<label{$attr_txt}><input type=\"checkbox\" name=\"{$name}{$brackets}\" value=\"{$k}\"{$checked} /> {$v}</label>";
 		}
 		echo $out;
 	}
@@ -54,11 +56,13 @@ class Html{
 		$out = "";
 		$data = $this->Form->get_value($name);
 		$attr_txt = $this->get_attr_text($attrs);
-		foreach($items as $i){
-			if( !is_string($i) ) continue;
-			$checked = ( $i === $data ) ? " checked=\"checked\"" : "";
-			$i = htmlspecialchars($i);
-			$out .= "<label{$attr_txt}><input type=\"radio\" name=\"{$name}\" value=\"{$i}\"{$checked} /> {$i}</label>";
+		foreach($items as $k => $v){
+			if( !is_string($v) ) continue;
+			if( is_int($k) ) $k = $v;
+			$checked = ( $k === $data ) ? " checked=\"checked\"" : "";
+			$k = htmlspecialchars($k);
+			$v = htmlspecialchars($v);
+			$out .= "<label{$attr_txt}><input type=\"radio\" name=\"{$name}\" value=\"{$k}\"{$checked} /> {$v}</label>";
 		}
 		echo $out;
 	}

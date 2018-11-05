@@ -54,6 +54,12 @@ class HtmlTest extends TestCase{
 				[]
 			],
 			[
+				"<label><input type=\"checkbox\" name=\"test[]\" value=\"foo\" checked=\"checked\" /> Apple</label><label><input type=\"checkbox\" name=\"test[]\" value=\"bar\" /> Orange</label>",
+				"test",
+				["foo" => "Apple", "bar" => "Orange"],
+				[]
+			],
+			[
 				"<label class=\"colored\"><input type=\"checkbox\" name=\"test\" value=\"bar\" /> bar</label>",
 				"test",
 				["bar"],
@@ -101,6 +107,12 @@ class HtmlTest extends TestCase{
 				"<label><input type=\"radio\" name=\"test\" value=\"foo\" checked=\"checked\" /> foo</label><label><input type=\"radio\" name=\"test\" value=\"bar\" /> bar</label>",
 				"test",
 				["foo", "bar"],
+				[]
+			],
+			[
+				"<label><input type=\"radio\" name=\"test\" value=\"foo\" checked=\"checked\" /> Apple</label><label><input type=\"radio\" name=\"test\" value=\"bar\" /> Orange</label>",
+				"test",
+				["foo" => "Apple", "bar" => "Orange"],
 				[]
 			],
 			[
