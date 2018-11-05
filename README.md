@@ -39,4 +39,4 @@ Add a dependency to your project's `composer.json` file.
 
 [The MIT License](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2017 [Hiroyuki Suzuki](https://mofg.net)
+Copyright (c) 2018 [Hiroyuki Suzuki](https://mofg.net)
