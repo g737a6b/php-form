@@ -262,7 +262,7 @@ class MofgFormTest extends TestCase{
 	}
 
 	/**
-	 * @dataProvider test_output_values_provider
+	 * @dataProvider output_values_provider
 	 */
 	public function test_output_values($value, $expected){
 		$this->expectOutputString($expected);
@@ -277,7 +277,7 @@ class MofgFormTest extends TestCase{
 		$Form->v("item");
 	}
 
-	public function test_output_values_provider(){
+	public function output_values_provider(){
 		$str = "<a href=\"javascript:void(0)\">&nbsp;</a>";
 		return [
 			["foo", "foo"],
@@ -286,7 +286,7 @@ class MofgFormTest extends TestCase{
 	}
 
 	/**
-	 * @dataProvider test_output_custom_errors_provider
+	 * @dataProvider output_custom_errors_provider
 	 */
 	public function test_output_custom_errors($errorFormat, $errorMessage, $expected){
 		$this->expectOutputString($expected);
@@ -303,7 +303,7 @@ class MofgFormTest extends TestCase{
 		$Form->e("item");
 	}
 
-	public function test_output_custom_errors_provider(){
+	public function output_custom_errors_provider(){
 		$str = "<a href=\"javascript:void(0)\">&nbsp;</a>";
 		return [
 			["%s", "foo", "foo"],
