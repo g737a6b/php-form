@@ -4,7 +4,9 @@ PHP form library.
 
 ## Examples of use
 
-See /demo.
+See `demo/`.
+
+https://mofg.net/oss/php-form/demo/
 
 ## Features
 
