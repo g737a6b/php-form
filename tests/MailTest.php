@@ -29,14 +29,14 @@ class MailTest extends TestCase{
 	}
 
 	/**
-	 * @dataProvider group_header_provider
+	 * @dataProvider provider_for_test_group_header
 	 */
 	public function test_group_header($expected, $header){
 		$Mail = new MofgForm\Mail();
 		$this->assertSame($expected, $Mail->group_header($header));
 	}
 
-	public function group_header_provider(){
+	public function provider_for_test_group_header(){
 		return [
 			[
 				"From: test@example.com",

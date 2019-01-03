@@ -13,7 +13,7 @@ class HtmlTest extends TestCase{
 	}
 
 	/**
-	 * @dataProvider checkbox_provider
+	 * @dataProvider provider_for_test_checkbox
 	 */
 	public function test_checkbox($expected, $name, $items, $attrs){
 		$Html = new MofgForm\Html($this->Form);
@@ -21,7 +21,7 @@ class HtmlTest extends TestCase{
 		$Html->checkbox($name, $items, $attrs);
 	}
 
-	public function checkbox_provider(){
+	public function provider_for_test_checkbox(){
 		return [
 			[
 				"",
@@ -69,7 +69,7 @@ class HtmlTest extends TestCase{
 	}
 
 	/**
-	 * @dataProvider radio_provider
+	 * @dataProvider provider_for_test_radio
 	 */
 	public function test_radio($expected, $name, $items, $attrs){
 		$Html = new MofgForm\Html($this->Form);
@@ -77,7 +77,7 @@ class HtmlTest extends TestCase{
 		$Html->radio($name, $items, $attrs);
 	}
 
-	public function radio_provider(){
+	public function provider_for_test_radio(){
 		return [
 			[
 				"",
@@ -125,7 +125,7 @@ class HtmlTest extends TestCase{
 	}
 
 	/**
-	 * @dataProvider select_provider
+	 * @dataProvider provider_for_test_select
 	 */
 	public function test_select($expected, $name, $options, $empty, $attrs){
 		$Html = new MofgForm\Html($this->Form);
@@ -133,7 +133,7 @@ class HtmlTest extends TestCase{
 		$Html->select($name, $options, $empty, $attrs);
 	}
 
-	public function select_provider(){
+	public function provider_for_test_select(){
 		return [
 			[
 				"<select name=\"test\"></select>",
@@ -195,7 +195,7 @@ class HtmlTest extends TestCase{
 	}
 
 	/**
-	 * @dataProvider text_provider
+	 * @dataProvider provider_for_test_text
 	 */
 	public function test_text($expected, $name, $attrs){
 		$Html = new MofgForm\Html($this->Form);
@@ -203,7 +203,7 @@ class HtmlTest extends TestCase{
 		$Html->text($name, $attrs);
 	}
 
-	public function text_provider(){
+	public function provider_for_test_text(){
 		return [
 			[
 				"<input type=\"text\" name=\"test\" value=\"foo\" />",
@@ -219,7 +219,7 @@ class HtmlTest extends TestCase{
 	}
 
 	/**
-	 * @dataProvider password_provider
+	 * @dataProvider provider_for_test_password
 	 */
 	public function test_password($expected, $name, $attrs){
 		$Html = new MofgForm\Html($this->Form);
@@ -227,7 +227,7 @@ class HtmlTest extends TestCase{
 		$Html->password($name, $attrs);
 	}
 
-	public function password_provider(){
+	public function provider_for_test_password(){
 		return [
 			[
 				"<input type=\"password\" name=\"test\" value=\"foo\" />",
@@ -243,7 +243,7 @@ class HtmlTest extends TestCase{
 	}
 
 	/**
-	 * @dataProvider textarea_provider
+	 * @dataProvider provider_for_test_textarea
 	 */
 	public function test_textarea($expected, $name, $attrs){
 		$Html = new MofgForm\Html($this->Form);
@@ -251,7 +251,7 @@ class HtmlTest extends TestCase{
 		$Html->textarea($name, $attrs);
 	}
 
-	public function textarea_provider(){
+	public function provider_for_test_textarea(){
 		return [
 			[
 				"<textarea name=\"test\">foo</textarea>",
