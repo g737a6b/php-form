@@ -94,7 +94,7 @@ class MofgForm{
 		$this->pull_data();
 
 		if( empty($_SESSION[$this->space]["items"]) ){
-			while( list($k, $v) = each($items) ) $this->register_item($k, $v);
+			foreach($items as $k => $v) $this->register_item($k, $v);
 		}
 
 		$this->import_posted_data($POST);
@@ -454,13 +454,13 @@ class MofgForm{
 	public function construct_text($title_open = "[", $title_close = "]\n", $separator = "\n\n"){
 		$items = ( !empty($_SESSION[$this->space]["items"]) ) ? $_SESSION[$this->space]["items"] : [];
 		$groups = ( !empty($_SESSION[$this->space]["groups"]) ) ? $_SESSION[$this->space]["groups"] : [];
+		$skip = [];
 
 		$result = "";
-		while( list($k, $v) = each($items) ){
-			if( empty($v) ) continue;
+		foreach($items as $k => $v){
+			if( in_array($k, $skip) || empty($v) ) continue;
 
-			reset($groups);
-			while( list($gk, $gv) = each($groups) ){
+			foreach($groups as $gk => $gv){
 				if( !in_array($k, $gv["items"]) ) continue;
 				$result .= $title_open.$gv["title"].$title_close;
 				for($i = 0; $i < count($gv["items"]); $i++){
@@ -472,9 +472,8 @@ class MofgForm{
 						if( isset($items[$item]["add"]["after"]) ) $result .= $items[$item]["add"]["after"];
 					}
 					$result .= $gv["separator"];
-					if( isset($items[$item]) ) $items[$item] = [];
+					if( isset($items[$item]) ) $skip[] = $item;
 				}
-				unset($groups[$gk]);
 				if( ($seplen = mb_strlen($gv["separator"])) > 0 ) $result = mb_substr($result, 0, -$seplen);
 				$result .= $separator;
 				continue 2;

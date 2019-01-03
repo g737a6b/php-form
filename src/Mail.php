@@ -106,7 +106,7 @@ class Mail{
 			$groups[$k][] = $v;
 		}
 
-		while( list($k, $v) = each($groups) ){
+		foreach($groups as $k => $v){
 			if( $result !== "" ) $result .= "\n";
 			$result .= $k.": ".implode(", ", $v);
 		}
