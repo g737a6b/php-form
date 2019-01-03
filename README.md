@@ -37,6 +37,14 @@ Add a dependency to your project's `composer.json` file.
 }
 ```
 
+## Development
+
+### Run tests
+
+```sh
+docker run -it --rm -v $(pwd):/app composer:1.8 run-script tests
+```
+
 ## License
 
 [The MIT License](http://opensource.org/licenses/MIT)
