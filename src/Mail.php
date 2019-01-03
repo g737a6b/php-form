@@ -9,6 +9,8 @@ namespace MofgForm;
  * @copyright Copyright (c) 2019 Hiroyuki Suzuki mofg.net
  */
 class Mail{
+	use MultiMethodNameTrait;
+
 	/**
 	 * @var string
 	 */

@@ -11,6 +11,8 @@ namespace MofgForm;
  * @version 3.1.0
  */
 class MofgForm{
+	use MultiMethodNameTrait;
+
 	protected $space = "MofgForm";
 	protected $data = [];
 	protected $values = [];
