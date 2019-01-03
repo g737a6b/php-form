@@ -6,9 +6,11 @@ namespace MofgForm;
  *
  * @package MofgForm
  * @author Hiroyuki Suzuki
- * @copyright Copyright (c) 2018 Hiroyuki Suzuki mofg.net
+ * @copyright Copyright (c) 2019 Hiroyuki Suzuki mofg.net
  */
 class Mail{
+	use MultiMethodNameTrait;
+
 	/**
 	 * @var string
 	 */
@@ -106,7 +108,7 @@ class Mail{
 			$groups[$k][] = $v;
 		}
 
-		while( list($k, $v) = each($groups) ){
+		foreach($groups as $k => $v){
 			if( $result !== "" ) $result .= "\n";
 			$result .= $k.": ".implode(", ", $v);
 		}

@@ -152,7 +152,7 @@ class MofgFormTest extends TestCase{
 	}
 
 	/**
-	 * @dataProvider validate_provider
+	 * @dataProvider provider_for_test_validate
 	 */
 	public function test_validate($options, $value, $expected){
 		$_SESSION = [];
@@ -165,7 +165,7 @@ class MofgFormTest extends TestCase{
 		$this->assertSame($expected, $Form->validate("ID"));
 	}
 
-	public function validate_provider(){
+	public function provider_for_test_validate(){
 		return [
 			[["required" => false], "", MofgForm::E_NONE],
 			[["required" => false], [], MofgForm::E_NONE],
@@ -262,7 +262,7 @@ class MofgFormTest extends TestCase{
 	}
 
 	/**
-	 * @dataProvider output_values_provider
+	 * @dataProvider provider_for_test_output_values
 	 */
 	public function test_output_values($value, $expected){
 		$this->expectOutputString($expected);
@@ -277,7 +277,7 @@ class MofgFormTest extends TestCase{
 		$Form->v("item");
 	}
 
-	public function output_values_provider(){
+	public function provider_for_test_output_values(){
 		$str = "<a href=\"javascript:void(0)\">&nbsp;</a>";
 		return [
 			["foo", "foo"],
@@ -286,7 +286,7 @@ class MofgFormTest extends TestCase{
 	}
 
 	/**
-	 * @dataProvider output_custom_errors_provider
+	 * @dataProvider provider_for_test_output_custom_errors
 	 */
 	public function test_output_custom_errors($errorFormat, $errorMessage, $expected){
 		$this->expectOutputString($expected);
@@ -303,7 +303,7 @@ class MofgFormTest extends TestCase{
 		$Form->e("item");
 	}
 
-	public function output_custom_errors_provider(){
+	public function provider_for_test_output_custom_errors(){
 		$str = "<a href=\"javascript:void(0)\">&nbsp;</a>";
 		return [
 			["%s", "foo", "foo"],

@@ -6,9 +6,11 @@ namespace MofgForm;
  *
  * @package MofgForm
  * @author Hiroyuki Suzuki
- * @copyright Copyright (c) 2018 Hiroyuki Suzuki mofg.net
+ * @copyright Copyright (c) 2019 Hiroyuki Suzuki mofg.net
  */
 class Html{
+	use MultiMethodNameTrait;
+
 	/**
 	 * @var object
 	 */
