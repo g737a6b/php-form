@@ -44,7 +44,7 @@ $items = [
 
 $Form = new MofgForm("demo", $items, $_POST);
 
-$Form->set_error_message([
+$Form->setErrorMessage([
 	MofgForm::E_REQUIRED => "Required",
 	MofgForm::E_FMT_ALPNUM => "Alphanumeric only"
 ]);
@@ -52,15 +52,15 @@ $Form->set_error_message([
 $page = $Form->settle();
 
 if( $page === 3 ){
-	$toString = $Form->construct_text();
+	$toString = $Form->constructText();
 
-	$Form->Mail->add_to("YOUR EMAIL ADDRESS");
-	$Form->Mail->set_subject("MofgForm Submitted");
-	$Form->Mail->set_body("MofgForm Submitted\n\n--------\n\n{$toString}");
-	$Form->Mail->add_header("From: noreply@example.com");
+	$Form->Mail->addTo("YOUR EMAIL ADDRESS");
+	$Form->Mail->setSubject("MofgForm Submitted");
+	$Form->Mail->setBody("MofgForm Submitted\n\n--------\n\n{$toString}");
+	$Form->Mail->addHeader("From: noreply@example.com");
 	$Form->Mail->send();
 
-	$Form->end_clean();
+	$Form->endClean();
 }
 ?>
 <!doctype html>
@@ -114,9 +114,9 @@ if( $page === 3 ){
 				<hr />
 
 				<div class="mt20 tac">
-					<input type="submit" class="btn-01 btn-01--primary effect-fade-on-hover" name="<?php echo $Form->get_name_for(MofgForm::CTL_ENTER); ?>" value="Next" />
+					<input type="submit" class="btn-01 btn-01--primary effect-fade-on-hover" name="<?php echo $Form->getNameFor(MofgForm::CTL_ENTER); ?>" value="Next" />
 					<span class="pad">&nbsp;</span>
-					<input type="submit" class="btn-01 effect-fade-on-hover" name="<?php echo $Form->get_name_for(MofgForm::CTL_BACK); ?>" value="Prev" />
+					<input type="submit" class="btn-01 effect-fade-on-hover" name="<?php echo $Form->getNameFor(MofgForm::CTL_BACK); ?>" value="Prev" />
 				</div>
 			</form>
 <?php else: ?>
@@ -156,9 +156,9 @@ if( $page === 3 ){
 				<hr />
 
 				<div class="mt20 tac">
-					<input type="submit" class="btn-01 btn-01--primary effect-fade-on-hover" name="<?php echo $Form->get_name_for(MofgForm::CTL_ENTER); ?>" value="Next" />
+					<input type="submit" class="btn-01 btn-01--primary effect-fade-on-hover" name="<?php echo $Form->getNameFor(MofgForm::CTL_ENTER); ?>" value="Next" />
 					<span class="pad">&nbsp;</span>
-					<input type="submit" class="btn-01 effect-fade-on-hover" name="<?php echo $Form->get_name_for(MofgForm::CTL_RESET); ?>" value="Reset" />
+					<input type="submit" class="btn-01 effect-fade-on-hover" name="<?php echo $Form->getNameFor(MofgForm::CTL_RESET); ?>" value="Reset" />
 				</div>
 			</form>
 <?php endif; ?>
