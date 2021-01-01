@@ -7,7 +7,7 @@ use MofgForm\Html;
 class HtmlTest extends TestCase{
 	protected $Form;
 
-	protected function setUp(){
+	protected function setUp() : void{
 		$this->Form = $this->createMock(MofgForm\MofgForm::class);
 		$this->Form->method("get_value")->willReturn("foo");
 	}
