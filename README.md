@@ -6,7 +6,10 @@ PHP form library.
 
 See `demo/`.
 
-https://mofg.net/oss/php-form/demo/
+```sh
+docker run -it --rm -p 8080:80 -v $(pwd):/var/www/html php:7.4-apache
+# http://localhost:8080/demo/
+```
 
 ## Features
 
@@ -39,14 +42,20 @@ Add a dependency to your project's `composer.json` file.
 
 ## Development
 
+### Install dependencies
+
+```sh
+docker run -it --rm -v $(pwd):/app composer:2.0 install
+```
+
 ### Run tests
 
 ```sh
-docker run -it --rm -v $(pwd):/app composer:1.8 run-script tests
+docker run -it --rm -v $(pwd):/app composer:2.0 run-script tests
 ```
 
 ## License
 
 [The MIT License](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2019 [Hiroyuki Suzuki](https://mofg.net)
+Copyright (c) 2021 [Hiroyuki Suzuki](https://mofg.net)

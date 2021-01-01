@@ -3,8 +3,6 @@ namespace MofgForm;
 
 /**
  * Support both snake_case() and camelCase()
- *
- * Do not use snake_case() but camelCase().
  */
 trait MultiMethodNameTrait{
 	public function __call($name, $arguments){
