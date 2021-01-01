@@ -49,4 +49,4 @@ docker run -it --rm -v $(pwd):/app composer:1.8 run-script tests
 
 [The MIT License](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2019 [Hiroyuki Suzuki](https://mofg.net)
+Copyright (c) 2021 [Hiroyuki Suzuki](https://mofg.net)

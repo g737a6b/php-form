@@ -6,9 +6,8 @@ namespace MofgForm;
  *
  * @package MofgForm
  * @author Hiroyuki Suzuki
- * @copyright Copyright (c) 2019 Hiroyuki Suzuki mofg.net
+ * @copyright Copyright (c) 2021 Hiroyuki Suzuki mofg.net
  * @license http://opensource.org/licenses/MIT The MIT License
- * @version 3.2.1
  */
 class MofgForm{
 	use MultiMethodNameTrait;
