@@ -167,7 +167,6 @@ if( $page === 3 ){
 
 	<div id="footer">
 		<div><a href="https://github.com/g737a6b/php-form">Download/View Source on Github</a></div>
-		<div><a href="#">Read API Documentation</a></div>
 		<div class="copyright">(c) 2021 Hiroyuki Suzuki <a href="https://mofg.net/">mofg.net</a></div>
 	</div><!-- #footer -->
 

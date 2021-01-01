@@ -6,7 +6,10 @@ PHP form library.
 
 See `demo/`.
 
-https://mofg.net/oss/php-form/demo/
+```sh
+docker run -it --rm -p 8080:80 -v $(pwd):/var/www/html php:7.4-apache
+# http://localhost:8080/demo/
+```
 
 ## Features
 
