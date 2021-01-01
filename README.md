@@ -39,10 +39,16 @@ Add a dependency to your project's `composer.json` file.
 
 ## Development
 
+### Install dependencies
+
+```sh
+docker run -it --rm -v $(pwd):/app composer:2.0 install
+```
+
 ### Run tests
 
 ```sh
-docker run -it --rm -v $(pwd):/app composer:1.8 run-script tests
+docker run -it --rm -v $(pwd):/app composer:2.0 run-script tests
 ```
 
 ## License
