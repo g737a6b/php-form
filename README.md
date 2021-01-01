@@ -1,4 +1,4 @@
-# MofgForm [![CircleCI](https://circleci.com/gh/g737a6b/php-form.svg?style=svg)](https://circleci.com/gh/g737a6b/php-form)
+# MofgForm ![main](https://github.com/g737a6b/php-form/workflows/main/badge.svg)
 
 PHP form library.
 
