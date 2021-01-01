@@ -1,0 +1,18 @@
+name: main
+on: [push]
+jobs:
+  build-and-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache composer packages
+        uses: actions/cache@v2
+        env:
+          cache-name: v1-cache-composer-packages
+        with:
+          path: ./vendor
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./composer.lock') }}
+      - name: Install composer packages
+        run: docker run --rm -v $GITHUB_WORKSPACE:/app composer:2.0 install
+      - name: Run PHPUnit tests
+        run: docker run --rm -v $GITHUB_WORKSPACE:/app composer:2.0 run-script tests
