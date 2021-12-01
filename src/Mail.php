@@ -66,7 +66,7 @@ class Mail{
 	}
 
 	/**
-	 * @param (string|array) $data
+	 * @param string|array $data
 	 * @param string $separator (optional)
 	 * @param string $pattern (optional)
 	 * @return string
@@ -116,7 +116,7 @@ class Mail{
 	}
 
 	/**
-	 * @param (string|array) $to
+	 * @param string|array $to
 	 */
 	public function add_to($to){
 		$add = $this->construct_data($to, ",", self::FORMAT_ADDRESS);
@@ -142,7 +142,7 @@ class Mail{
 	}
 
 	/**
-	 * @param (string|array) $header
+	 * @param string|array $header
 	 */
 	public function add_header($header){
 		$add = $this->construct_data($header, "\n", self::FORMAT_HEADER);
