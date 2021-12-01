@@ -381,7 +381,7 @@ class MofgForm{
 
 	/**
 	 * @param string $id
-	 * @param (string|array) $value
+	 * @param string|array $value
 	 * @return boolean
 	 */
 	public function set_value($id, $value){
@@ -496,7 +496,7 @@ class MofgForm{
 
 	/**
 	 * @param string $data
-	 * @param (integer|array) $filter
+	 * @param integer|array $filter
 	 * @return string
 	 */
 	public function apply_filter($data, $filter){
