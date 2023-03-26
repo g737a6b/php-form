@@ -13,6 +13,9 @@
 		"source": "https://github.com/g737a6b/php-form",
 		"issues": "https://github.com/g737a6b/php-form/issues"
 	},
+	"require": {
+		"php": ">=7.4"
+	},
 	"require-dev": {
 		"phpunit/phpunit": "^9.5"
 	},
