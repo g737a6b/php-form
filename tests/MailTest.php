@@ -36,7 +36,7 @@ class MailTest extends TestCase{
 		$this->assertSame($expected, $Mail->group_header($header));
 	}
 
-	public function provider_for_test_group_header(){
+	public static function provider_for_test_group_header(){
 		return [
 			[
 				"From: test@example.com",
