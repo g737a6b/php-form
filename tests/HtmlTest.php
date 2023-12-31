@@ -21,7 +21,7 @@ class HtmlTest extends TestCase{
 		$Html->checkbox($name, $items, $attrs);
 	}
 
-	public function provider_for_test_checkbox(){
+	public static function provider_for_test_checkbox(){
 		return [
 			[
 				"",
@@ -77,7 +77,7 @@ class HtmlTest extends TestCase{
 		$Html->radio($name, $items, $attrs);
 	}
 
-	public function provider_for_test_radio(){
+	public static function provider_for_test_radio(){
 		return [
 			[
 				"",
@@ -133,7 +133,7 @@ class HtmlTest extends TestCase{
 		$Html->select($name, $options, $empty, $attrs);
 	}
 
-	public function provider_for_test_select(){
+	public static function provider_for_test_select(){
 		return [
 			[
 				"<select name=\"test\"></select>",
@@ -203,7 +203,7 @@ class HtmlTest extends TestCase{
 		$Html->text($name, $attrs);
 	}
 
-	public function provider_for_test_text(){
+	public static function provider_for_test_text(){
 		return [
 			[
 				"<input type=\"text\" name=\"test\" value=\"foo\" />",
@@ -227,7 +227,7 @@ class HtmlTest extends TestCase{
 		$Html->password($name, $attrs);
 	}
 
-	public function provider_for_test_password(){
+	public static function provider_for_test_password(){
 		return [
 			[
 				"<input type=\"password\" name=\"test\" value=\"foo\" />",
@@ -251,7 +251,7 @@ class HtmlTest extends TestCase{
 		$Html->textarea($name, $attrs);
 	}
 
-	public function provider_for_test_textarea(){
+	public static function provider_for_test_textarea(){
 		return [
 			[
 				"<textarea name=\"test\">foo</textarea>",

@@ -165,7 +165,7 @@ class MofgFormTest extends TestCase{
 		$this->assertSame($expected, $Form->validate("ID"));
 	}
 
-	public function provider_for_test_validate(){
+	public static function provider_for_test_validate(){
 		return [
 			[["required" => false], "", MofgForm::E_NONE],
 			[["required" => false], [], MofgForm::E_NONE],
@@ -277,7 +277,7 @@ class MofgFormTest extends TestCase{
 		$Form->v("item");
 	}
 
-	public function provider_for_test_output_values(){
+	public static function provider_for_test_output_values(){
 		$str = "<a href=\"javascript:void(0)\">&nbsp;</a>";
 		return [
 			["foo", "foo"],
@@ -303,7 +303,7 @@ class MofgFormTest extends TestCase{
 		$Form->e("item");
 	}
 
-	public function provider_for_test_output_custom_errors(){
+	public static function provider_for_test_output_custom_errors(){
 		$str = "<a href=\"javascript:void(0)\">&nbsp;</a>";
 		return [
 			["%s", "foo", "foo"],

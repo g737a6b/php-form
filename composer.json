@@ -17,14 +17,11 @@
 		"php": ">=7.4"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "^9.5"
+		"phpunit/phpunit": "^10.5"
 	},
 	"autoload": {
 		"psr-4": {
 			"MofgForm\\": "src/"
 		}
-	},
-	"scripts": {
-		"tests": "phpunit tests/"
 	}
 }
