@@ -23,8 +23,5 @@
 		"psr-4": {
 			"MofgForm\\": "src/"
 		}
-	},
-	"scripts": {
-		"tests": "phpunit tests/"
 	}
 }

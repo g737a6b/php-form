@@ -13,6 +13,6 @@ jobs:
           path: ./vendor
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./composer.lock') }}
       - name: Install composer packages
-        run: docker run --rm -v $GITHUB_WORKSPACE:/app composer:2.0 install
+        run: docker run --rm -v $GITHUB_WORKSPACE:/app composer:2.6.6 install
       - name: Run PHPUnit tests
-        run: docker run --rm -v $GITHUB_WORKSPACE:/app composer:2.0 run-script tests
+        run: docker run --rm -v $GITHUB_WORKSPACE:/app -w /app php:8.3 ./vendor/bin/phpunit ./tests
