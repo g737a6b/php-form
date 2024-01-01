@@ -16,3 +16,5 @@ jobs:
         run: docker run --rm -v $GITHUB_WORKSPACE:/app composer:2.6.6 install
       - name: Run PHPUnit tests
         run: docker run --rm -v $GITHUB_WORKSPACE:/app -w /app php:8.3 ./vendor/bin/phpunit ./tests
+      - name: Run PHP-CS-Fixer
+        run: docker run --rm -v $GITHUB_WORKSPACE:/app -w /app php:8.3 ./vendor/bin/php-cs-fixer fix ./src --dry-run
