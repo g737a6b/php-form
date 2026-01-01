@@ -45,20 +45,20 @@ class Mail
      */
     public function send($to = null, $subject = null, $body = null, $header = null)
     {
-        if(!isset($to)) {
+        if (!isset($to)) {
             $to = $this->to;
             $subject = $this->subject;
             $body = $this->body;
             $header = $this->header;
-        } elseif(!isset($subject) && !isset($body)) {
+        } elseif (!isset($subject) && !isset($body)) {
             return false;
         }
 
         $result = false;
         $to = $this->construct_data($to, ",", self::FORMAT_ADDRESS);
-        if(!empty($to)) {
+        if (!empty($to)) {
             $header = $this->construct_data($header, "\n", self::FORMAT_HEADER);
-            if(empty($header)) {
+            if (empty($header)) {
                 $result = mb_send_mail($to, $subject, $body);
             } else {
                 $header = $this->group_header($header);
@@ -76,19 +76,19 @@ class Mail
      */
     public function construct_data($data, $separator = ",", $pattern = '/.*/')
     {
-        if(is_string($data)) {
+        if (is_string($data)) {
             $data = trim($data, " \t\n\r\0\x0B");
             $data = explode($separator, $data);
         }
-        if(!is_array($data)) {
+        if (!is_array($data)) {
             return false;
         }
 
         $count = count($data);
-        for($i = 0; $i < $count; $i++) {
-            if(is_string($data[$i])) {
+        for ($i = 0; $i < $count; $i++) {
+            if (is_string($data[$i])) {
                 $data[$i] = trim($data[$i], " \t\n\r\0\x0B");
-                if(!preg_match($pattern, $data[$i])) {
+                if (!preg_match($pattern, $data[$i])) {
                     unset($data[$i]);
                 }
             } else {
@@ -104,25 +104,25 @@ class Mail
      */
     public function group_header($header)
     {
-        if(!is_string($header)) {
+        if (!is_string($header)) {
             return false;
         }
         $result = "";
         $groups = [];
 
         $items = explode("\n", $header);
-        foreach($items as $i) {
+        foreach ($items as $i) {
             list($k, $v) = explode(":", $i);
             $k = trim($k, " \t\n\r\0\x0B");
             $v = trim($v, " \t\n\r\0\x0B");
-            if(!isset($groups[$k])) {
+            if (!isset($groups[$k])) {
                 $groups[$k] = [];
             }
             $groups[$k][] = $v;
         }
 
-        foreach($groups as $k => $v) {
-            if($result !== "") {
+        foreach ($groups as $k => $v) {
+            if ($result !== "") {
                 $result .= "\n";
             }
             $result .= $k.": ".implode(", ", $v);
@@ -137,10 +137,10 @@ class Mail
     public function add_to($to)
     {
         $add = $this->construct_data($to, ",", self::FORMAT_ADDRESS);
-        if($add === false) {
+        if ($add === false) {
             return;
         }
-        if(!empty($this->to) && $add !== "") {
+        if (!empty($this->to) && $add !== "") {
             $this->to .= ",";
         }
         $this->to .= $add;
@@ -152,7 +152,7 @@ class Mail
      */
     public function set_subject($subject)
     {
-        if(!is_string($subject)) {
+        if (!is_string($subject)) {
             return;
         }
         $this->subject = $subject;
@@ -164,7 +164,7 @@ class Mail
      */
     public function set_body($body)
     {
-        if(!is_string($body)) {
+        if (!is_string($body)) {
             return;
         }
         $this->body = $body;
@@ -177,10 +177,10 @@ class Mail
     public function add_header($header)
     {
         $add = $this->construct_data($header, "\n", self::FORMAT_HEADER);
-        if($add === false) {
+        if ($add === false) {
             return;
         }
-        if(!empty($this->header) && $add !== "") {
+        if (!empty($this->header) && $add !== "") {
             $this->header .= "\n";
         }
         $this->header .= $add;

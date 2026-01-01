@@ -34,23 +34,23 @@ class Html
      */
     public function checkbox($name, $items, $attrs = [])
     {
-        if(is_string($items)) {
+        if (is_string($items)) {
             $items = [$items];
         }
-        if(!is_array($items)) {
+        if (!is_array($items)) {
             return;
         }
         $out = "";
         $data = $this->Form->get_value(str_replace("[]", "", $name));
-        if(!is_array($data)) {
+        if (!is_array($data)) {
             $data = [$data];
         }
         $attr_txt = $this->get_attr_text($attrs);
-        foreach($items as $k => $v) {
-            if(!is_string($v)) {
+        foreach ($items as $k => $v) {
+            if (!is_string($v)) {
                 continue;
             }
-            if(is_int($k)) {
+            if (is_int($k)) {
                 $k = $v;
             }
             $checked = (in_array($k, $data, true)) ? " checked=\"checked\"" : "";
@@ -70,20 +70,20 @@ class Html
      */
     public function radio($name, $items, $attrs = [])
     {
-        if(is_string($items)) {
+        if (is_string($items)) {
             $items = [$items];
         }
-        if(!is_array($items)) {
+        if (!is_array($items)) {
             return;
         }
         $out = "";
         $data = $this->Form->get_value($name);
         $attr_txt = $this->get_attr_text($attrs);
-        foreach($items as $k => $v) {
-            if(!is_string($v)) {
+        foreach ($items as $k => $v) {
+            if (!is_string($v)) {
                 continue;
             }
-            if(is_int($k)) {
+            if (is_int($k)) {
                 $k = $v;
             }
             $checked = ($k === $data) ? " checked=\"checked\"" : "";
@@ -103,19 +103,19 @@ class Html
      */
     public function select($name, $options, $empty = "", $attrs = [])
     {
-        if(is_string($options)) {
+        if (is_string($options)) {
             $options = [$options];
         }
-        if(!is_array($options)) {
+        if (!is_array($options)) {
             return;
         }
         $attr_txt = $this->get_attr_text($attrs);
         $out = "<select name=\"".htmlspecialchars($name)."\"{$attr_txt}>";
-        if(is_string($empty) && $empty !== "") {
+        if (is_string($empty) && $empty !== "") {
             $out .= "<option value=\"\">".htmlspecialchars($empty)."</option>";
         }
-        foreach($options as $i) {
-            if(!is_string($i)) {
+        foreach ($options as $i) {
+            if (!is_string($i)) {
                 continue;
             }
             $selected = ($this->Form->get_value($name) === $i) ? " selected=\"selected\"" : "";
@@ -172,9 +172,9 @@ class Html
     public function get_attr_text($attrs = [])
     {
         $result = "";
-        if(!empty($attrs) && is_array($attrs)) {
-            foreach($attrs as $k => $v) {
-                if(!is_string($k) || !is_string($v)) {
+        if (!empty($attrs) && is_array($attrs)) {
+            foreach ($attrs as $k => $v) {
+                if (!is_string($k) || !is_string($v)) {
                     continue;
                 }
                 $v = htmlspecialchars($v);
