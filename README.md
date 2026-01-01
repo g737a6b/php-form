@@ -54,6 +54,12 @@ docker run -it --rm -v $(pwd):/app composer:2.9.2 install
 docker run -it --rm -v $(pwd):/app -w /app php:8.3 ./vendor/bin/phpunit ./tests
 ```
 
+### Format code
+
+```sh
+docker run -it --rm -v $(pwd):/app -w /app php:8.3 ./vendor/bin/php-cs-fixer fix ./src
+```
+
 ## License
 
 [The MIT License](http://opensource.org/licenses/MIT)
