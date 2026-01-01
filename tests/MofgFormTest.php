@@ -397,6 +397,185 @@ EOD;
         $this->assertSame($expected, $text);
     }
 
+    /**
+     * @dataProvider provider_for_test_apply_filter
+     */
+    public function test_apply_filter($input, $filter, $expected)
+    {
+        $_SESSION = [];
+        $Form = new MofgForm();
+        $result = $Form->apply_filter($input, $filter);
+        $this->assertSame($expected, $result);
+    }
+
+    public static function provider_for_test_apply_filter()
+    {
+        return [
+            ["  test  ", MofgForm::FLT_TRIM, "test"],
+            ["  test  ", MofgForm::FLT_LTRIM, "test  "],
+            ["  test  ", MofgForm::FLT_RTRIM, "  test"],
+            ["ｱｲｳ", MofgForm::FLT_TO_ZENKAKU_KANA, "アイウ"],
+            ["ＡＢＣ１２３", MofgForm::FLT_TO_HANKAKU_ALPNUM, "ABC123"],
+            ["abc", MofgForm::FLT_TO_UPPER_CASE, "ABC"],
+            ["ABC", MofgForm::FLT_TO_LOWER_CASE, "abc"],
+            ["line1\r\nline2\rline3", MofgForm::FLT_EOL_TO_N, "line1\nline2\nline3"],
+            ["line1\r\nline2\rline3", MofgForm::FLT_EOL_TO_SPACE, "line1 line2 line3"],
+            ["  ＡＢＣ  ", [MofgForm::FLT_TRIM, MofgForm::FLT_TO_HANKAKU_ALPNUM], "ABC"],
+        ];
+    }
+
+    public function test_remove_item()
+    {
+        $_SESSION = [];
+        $items = ["item1" => ["title" => "Item 1"], "item2" => ["title" => "Item 2"]];
+        $POST = ["item1" => "value1", "item2" => "value2", "_enter" => "1"];
+        $Form = new MofgForm("", $items, $POST);
+
+        $this->assertSame("value1", $Form->get_value("item1"));
+        $this->assertSame("value2", $Form->get_value("item2"));
+
+        $Form->remove_item("item1");
+        $this->assertFalse($Form->get_value("item1"));
+        $this->assertSame("value2", $Form->get_value("item2"));
+    }
+
+    public function test_remove_group()
+    {
+        $_SESSION = [];
+        $items = ["item1" => ["title" => "Item 1"], "item2" => ["title" => "Item 2"]];
+        $POST = ["item1" => "value1", "item2" => "value2", "_enter" => "1"];
+        $Form = new MofgForm("", $items, $POST);
+        $Form->settle();
+
+        $Form->register_group("group1", "Group 1", ["item1", "item2"], " - ");
+        $text = $Form->construct_text("[", "] ", "\n");
+        $this->assertStringContainsString("Group 1", $text);
+
+        $Form->remove_group("group1");
+        $text = $Form->construct_text("[", "] ", "\n");
+        $this->assertStringNotContainsString("Group 1", $text);
+    }
+
+    public function test_end_clean()
+    {
+        $_SESSION = [];
+        $items = ["item" => ["title" => "Item"]];
+        $POST = ["item" => "value", "_enter" => "1"];
+        $Form = new MofgForm("session_space", $items, $POST);
+        $Form->settle();
+
+        $this->assertNotEmpty($_SESSION["session_space"]);
+        $this->assertSame("value", $Form->get_value("item"));
+
+        $Form->end_clean();
+        $this->assertEmpty($_SESSION["session_space"]);
+        $this->assertFalse($Form->get_value("item"));
+    }
+
+    public function test_output_values_with_add_options()
+    {
+        $this->expectOutputString("(before)test(after)");
+        $_SESSION = [];
+        $Form = new MofgForm("", [
+            "item" => [
+                "add" => [
+                    "before" => "(before)",
+                    "after" => "(after)"
+                ]
+            ]
+        ], [
+            "item" => "test",
+            "_enter" => "1"
+        ]);
+        $Form->settle();
+        $Form->v("item");
+    }
+
+    public function test_array_value_validation()
+    {
+        $_SESSION = [];
+        $Form = new MofgForm("", [
+            "items" => ["rule" => ["format" => MofgForm::FMT_INT]]
+        ], [
+            "items" => ["value1", "value2"],
+            "_enter" => "1"
+        ]);
+        $this->assertSame(MofgForm::E_NONE, $Form->validate("items"));
+    }
+
+    public function test_array_value_output()
+    {
+        $this->expectOutputString("val1, val2, val3");
+        $_SESSION = [];
+        $Form = new MofgForm("", [
+            "items" => []
+        ], [
+            "items" => ["val1", "val2", "val3"],
+            "_enter" => "1"
+        ]);
+        $Form->settle();
+        $Form->v("items");
+    }
+
+    public function test_array_value_with_custom_glue()
+    {
+        $this->expectOutputString("val1 | val2 | val3");
+        $_SESSION = [];
+        $Form = new MofgForm("", [
+            "items" => []
+        ], [
+            "items" => ["val1", "val2", "val3"],
+            "_enter" => "1"
+        ]);
+        $Form->set_array_glue(" | ");
+        $Form->settle();
+        $Form->v("items");
+    }
+
+    public function test_getter_setter_methods()
+    {
+        $_SESSION = [];
+        $Form = new MofgForm();
+
+        $this->assertSame(1, $Form->get_page());
+        $Form->set_page(3);
+        $this->assertSame(3, $Form->get_page());
+        $Form->set_page(0);
+        $this->assertSame(1, $Form->get_page());
+        $Form->set_page(-1);
+        $this->assertSame(1, $Form->get_page());
+
+        $this->assertSame("_enter", $Form->get_name_for(MofgForm::CTL_ENTER));
+        $this->assertSame("_back", $Form->get_name_for(MofgForm::CTL_BACK));
+        $this->assertSame("_reset", $Form->get_name_for(MofgForm::CTL_RESET));
+
+        $this->assertTrue($Form->set_name_for(MofgForm::CTL_ENTER, "submit"));
+        $this->assertSame("submit", $Form->get_name_for(MofgForm::CTL_ENTER));
+
+        $this->assertSame("", $Form->get_name_for("invalid"));
+        $this->assertFalse($Form->set_name_for("invalid", "test"));
+
+        $this->assertTrue($Form->set_error_message([
+            MofgForm::E_REQUIRED => "Required field",
+            MofgForm::E_MINLEN => "Too short"
+        ]));
+    }
+
+    public function test_set_value()
+    {
+        $_SESSION = [];
+        $Form = new MofgForm("", ["item" => []]);
+
+        $this->assertTrue($Form->set_value("item", "test"));
+        $this->assertSame("test", $Form->get_value("item"));
+
+        $this->assertTrue($Form->set_value("item", ["val1", "val2"]));
+        $this->assertSame(["val1", "val2"], $Form->get_value("item"));
+
+        $this->assertFalse($Form->set_value("item", 123));
+        $this->assertFalse($Form->set_value("item", null));
+    }
+
     protected function get_sample_definition()
     {
         return [
