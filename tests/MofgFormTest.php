@@ -3,6 +3,7 @@
 require(__DIR__."/../autoload.php");
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use MofgForm\MofgForm;
 
 class MofgFormTest extends TestCase
@@ -158,9 +159,7 @@ class MofgFormTest extends TestCase
         $this->assertTrue($Form->has_error("item"));
     }
 
-    /**
-     * @dataProvider provider_for_test_validate
-     */
+    #[DataProvider('provider_for_test_validate')]
     public function test_validate($options, $value, $expected)
     {
         $_SESSION = [];
@@ -270,9 +269,7 @@ class MofgFormTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider provider_for_test_output_values
-     */
+    #[DataProvider('provider_for_test_output_values')]
     public function test_output_values($value, $expected)
     {
         $this->expectOutputString($expected);
@@ -296,9 +293,7 @@ class MofgFormTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider provider_for_test_output_custom_errors
-     */
+    #[DataProvider('provider_for_test_output_custom_errors')]
     public function test_output_custom_errors($errorFormat, $errorMessage, $expected)
     {
         $this->expectOutputString($expected);
@@ -397,9 +392,7 @@ EOD;
         $this->assertSame($expected, $text);
     }
 
-    /**
-     * @dataProvider provider_for_test_apply_filter
-     */
+    #[DataProvider('provider_for_test_apply_filter')]
     public function test_apply_filter($input, $filter, $expected)
     {
         $_SESSION = [];

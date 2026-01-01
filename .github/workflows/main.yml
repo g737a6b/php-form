@@ -13,8 +13,8 @@ jobs:
           path: ./vendor
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./composer.lock') }}
       - name: Install composer packages
-        run: docker run --rm -v $GITHUB_WORKSPACE:/app composer:2.6.6 install
+        run: docker run --rm -v $GITHUB_WORKSPACE:/app composer:2.9.2 install
       - name: Run PHPUnit tests
-        run: docker run --rm -v $GITHUB_WORKSPACE:/app -w /app php:8.3 ./vendor/bin/phpunit ./tests
+        run: docker run --rm -v $GITHUB_WORKSPACE:/app -w /app php:8.5 ./vendor/bin/phpunit ./tests
       - name: Run PHP-CS-Fixer
-        run: docker run --rm -v $GITHUB_WORKSPACE:/app -w /app php:8.3 ./vendor/bin/php-cs-fixer fix ./src --dry-run
+        run: docker run --rm -v $GITHUB_WORKSPACE:/app -w /app php:8.5 ./vendor/bin/php-cs-fixer fix ./src --dry-run

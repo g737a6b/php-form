@@ -3,6 +3,7 @@
 require(__DIR__."/../autoload.php");
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use MofgForm\Mail;
 
 class MailTest extends TestCase
@@ -72,9 +73,7 @@ class MailTest extends TestCase
         $this->assertSame("test@example.com", $result);
     }
 
-    /**
-     * @dataProvider provider_for_test_group_header
-     */
+    #[DataProvider('provider_for_test_group_header')]
     public function test_group_header($expected, $header)
     {
         $Mail = new MofgForm\Mail();
