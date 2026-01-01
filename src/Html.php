@@ -30,6 +30,7 @@ class Html
      * @param string $name
      * @param array $items
      * @param array $attrs (optional)
+     * @return void
      */
     public function checkbox($name, $items, $attrs = [])
     {
@@ -65,6 +66,7 @@ class Html
      * @param string $name
      * @param array $items
      * @param array $attrs (optional)
+     * @return void
      */
     public function radio($name, $items, $attrs = [])
     {
@@ -97,6 +99,7 @@ class Html
      * @param array $options
      * @param string $empty (optional)
      * @param array $attrs (optional)
+     * @return void
      */
     public function select($name, $options, $empty = "", $attrs = [])
     {
@@ -126,6 +129,7 @@ class Html
     /**
      * @param string $name
      * @param array $attrs (optional)
+     * @return void
      */
     public function text($name, $attrs = [])
     {
@@ -138,6 +142,7 @@ class Html
     /**
      * @param string $name
      * @param array $attrs (optional)
+     * @return void
      */
     public function password($name, $attrs = [])
     {
@@ -150,6 +155,7 @@ class Html
     /**
      * @param string $name
      * @param array $attrs (optional)
+     * @return void
      */
     public function textarea($name, $attrs = [])
     {

@@ -233,7 +233,7 @@ class MofgForm
 
     /**
      * @access protected
-     * @return integer
+     * @return integer|false
      */
     protected function count_errors()
     {
@@ -258,7 +258,7 @@ class MofgForm
 
     /**
      * @param string $id
-     * @return string
+     * @return string|false
      */
     public function validate($id)
     {
@@ -540,6 +540,7 @@ class MofgForm
     /**
      * @param string $id
      * @param boolean $add (optional)
+     * @return void
      */
     public function v($id, $add = true)
     {
@@ -566,6 +567,7 @@ class MofgForm
 
     /**
      * @param string $id
+     * @return void
      */
     public function e($id)
     {
