@@ -34,7 +34,7 @@ class Mail
     private $header = "";
 
     public const FORMAT_ADDRESS = '#\A[a-zA-Z0-9.!\#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9_\-]+(\.[a-zA-Z0-9_\-]+)+\z#';
-    public const FORMAT_HEADER = '#\A[a-zA-Z0-9_\-]+ *: *[^:]+\z#';
+    public const FORMAT_HEADER = '#\A[a-zA-Z0-9_\-]+ *: *[^\r\n:]+\z#';
 
     /**
      * @param string $to (optional)
