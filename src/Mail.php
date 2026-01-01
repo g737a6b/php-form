@@ -34,7 +34,7 @@ class Mail
     private $header = "";
 
     public const FORMAT_ADDRESS = '#\A[a-zA-Z0-9.!\#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9_\-]+(\.[a-zA-Z0-9_\-]+)+\z#';
-    public const FORMAT_HEADER = '#\A[a-zA-Z0-9_\-]+ *: *[^:]+\z#';
+    public const FORMAT_HEADER = '#\A[a-zA-Z0-9_\-]+ *: *[^\r\n:]+\z#';
 
     /**
      * @param string $to (optional)
@@ -72,7 +72,7 @@ class Mail
      * @param string|array $data
      * @param string $separator (optional)
      * @param string $pattern (optional)
-     * @return string
+     * @return string|false
      */
     public function construct_data($data, $separator = ",", $pattern = '/.*/')
     {
@@ -100,7 +100,7 @@ class Mail
 
     /**
      * @param string $header
-     * @return string
+     * @return string|false
      */
     public function group_header($header)
     {
@@ -132,6 +132,7 @@ class Mail
 
     /**
      * @param string|array $to
+     * @return void
      */
     public function add_to($to)
     {
@@ -147,6 +148,7 @@ class Mail
 
     /**
      * @param string $subject
+     * @return void
      */
     public function set_subject($subject)
     {
@@ -158,6 +160,7 @@ class Mail
 
     /**
      * @param string $body
+     * @return void
      */
     public function set_body($body)
     {
@@ -169,6 +172,7 @@ class Mail
 
     /**
      * @param string|array $header
+     * @return void
      */
     public function add_header($header)
     {
