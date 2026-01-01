@@ -3,19 +3,18 @@
 require(__DIR__."/../autoload.php");
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class HtmlTest extends TestCase
 {
     protected function createFormMock($returnValue = "foo")
     {
-        $mock = $this->createMock(MofgForm\MofgForm::class);
+        $mock = $this->createStub(MofgForm\MofgForm::class);
         $mock->method("get_value")->willReturn($returnValue);
         return $mock;
     }
 
-    /**
-     * @dataProvider provider_for_test_checkbox
-     */
+    #[DataProvider('provider_for_test_checkbox')]
     public function test_checkbox($expected, $name, $items, $attrs, $formValue = "foo")
     {
         $Form = $this->createFormMock($formValue);
@@ -136,9 +135,7 @@ class HtmlTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider provider_for_test_radio
-     */
+    #[DataProvider('provider_for_test_radio')]
     public function test_radio($expected, $name, $items, $attrs, $formValue = "foo")
     {
         $Form = $this->createFormMock($formValue);
@@ -236,9 +233,7 @@ class HtmlTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider provider_for_test_select
-     */
+    #[DataProvider('provider_for_test_select')]
     public function test_select($expected, $name, $options, $empty, $attrs, $formValue = "foo")
     {
         $Form = $this->createFormMock($formValue);
@@ -373,9 +368,7 @@ class HtmlTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider provider_for_test_text
-     */
+    #[DataProvider('provider_for_test_text')]
     public function test_text($expected, $name, $attrs, $formValue = "foo")
     {
         $Form = $this->createFormMock($formValue);
@@ -439,9 +432,7 @@ class HtmlTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider provider_for_test_password
-     */
+    #[DataProvider('provider_for_test_password')]
     public function test_password($expected, $name, $attrs, $formValue = "foo")
     {
         $Form = $this->createFormMock($formValue);
@@ -505,9 +496,7 @@ class HtmlTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider provider_for_test_textarea
-     */
+    #[DataProvider('provider_for_test_textarea')]
     public function test_textarea($expected, $name, $attrs, $formValue = "foo")
     {
         $Form = $this->createFormMock($formValue);

@@ -7,7 +7,7 @@ A PHP library for building and handling web forms.
 See `demo/`.
 
 ```sh
-docker run -it --rm -p 8080:80 -v $(pwd):/var/www/html php:7.4-apache
+docker run -it --rm -p 8080:80 -v $(pwd):/var/www/html php:8.5-apache
 # http://localhost:8080/demo/
 ```
 
@@ -51,13 +51,13 @@ docker run -it --rm -v $(pwd):/app composer:2.9.2 install
 ### Run tests
 
 ```sh
-docker run -it --rm -v $(pwd):/app -w /app php:8.3 ./vendor/bin/phpunit ./tests
+docker run -it --rm -v $(pwd):/app -w /app php:8.5 ./vendor/bin/phpunit ./tests
 ```
 
 ### Format code
 
 ```sh
-docker run -it --rm -v $(pwd):/app -w /app php:8.3 ./vendor/bin/php-cs-fixer fix ./src
+docker run -it --rm -v $(pwd):/app -w /app php:8.5 ./vendor/bin/php-cs-fixer fix ./src
 ```
 
 ## License
