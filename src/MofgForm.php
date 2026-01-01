@@ -89,7 +89,7 @@ class MofgForm
      */
     public function __construct($session_space = "", $items = [], $POST = [])
     {
-        if(is_string($session_space) && $session_space !== "") {
+        if (is_string($session_space) && $session_space !== "") {
             $this->space = $session_space;
         }
 
@@ -99,15 +99,15 @@ class MofgForm
         $this->init();
         $this->pull_data();
 
-        if(empty($_SESSION[$this->space]["items"])) {
-            foreach($items as $k => $v) {
+        if (empty($_SESSION[$this->space]["items"])) {
+            foreach ($items as $k => $v) {
                 $this->register_item($k, $v);
             }
         }
 
         $this->import_posted_data($POST);
 
-        if($this->flags["reset"]) {
+        if ($this->flags["reset"]) {
             $this->end_clean();
             $this->init();
         }
@@ -137,7 +137,7 @@ class MofgForm
      */
     protected function pull_data()
     {
-        if(isset($_SESSION[$this->space]["data"])) {
+        if (isset($_SESSION[$this->space]["data"])) {
             $this->data = $_SESSION[$this->space]["data"];
         }
     }
@@ -172,28 +172,28 @@ class MofgForm
      */
     protected function import_posted_data($POST = [])
     {
-        if(empty($POST) || empty($_SESSION[$this->space]["items"])) {
+        if (empty($POST) || empty($_SESSION[$this->space]["items"])) {
             return false;
         }
-        if(!empty($POST[$this->data["name_for_enter"]]) || !empty($POST[$this->data["name_for_enter"]."_x"])) {
+        if (!empty($POST[$this->data["name_for_enter"]]) || !empty($POST[$this->data["name_for_enter"]."_x"])) {
             $this->flags["enter"] = true;
         }
-        if(!empty($POST[$this->data["name_for_back"]]) || !empty($POST[$this->data["name_for_back"]."_x"])) {
+        if (!empty($POST[$this->data["name_for_back"]]) || !empty($POST[$this->data["name_for_back"]."_x"])) {
             $this->flags["back"] = true;
         }
-        if(!empty($POST[$this->data["name_for_reset"]]) || !empty($POST[$this->data["name_for_reset"]."_x"])) {
+        if (!empty($POST[$this->data["name_for_reset"]]) || !empty($POST[$this->data["name_for_reset"]."_x"])) {
             $this->flags["reset"] = true;
         }
-        if(!$this->flags["enter"]) {
+        if (!$this->flags["enter"]) {
             return true;
         }
 
-        foreach($_SESSION[$this->space]["items"] as $k => $v) {
-            if($v["in_page"] !== $this->data["page"] || !isset($POST[$k]) || (!is_string($POST[$k]) && !is_array($POST[$k]))) {
+        foreach ($_SESSION[$this->space]["items"] as $k => $v) {
+            if ($v["in_page"] !== $this->data["page"] || !isset($POST[$k]) || (!is_string($POST[$k]) && !is_array($POST[$k]))) {
                 continue;
             }
             $value = $POST[$k];
-            if(isset($v["filter"])) {
+            if (isset($v["filter"])) {
                 $value = $this->apply_filter($value, $v["filter"]);
             }
             $this->values[$k] = $value;
@@ -213,19 +213,19 @@ class MofgForm
      */
     public function settle()
     {
-        if($this->flags["settled"] || $this->flags["reset"]) {
+        if ($this->flags["settled"] || $this->flags["reset"]) {
             return $this->data["page"];
         }
         $this->flags["settled"] = true;
 
-        if($this->flags["enter"] && $this->count_errors() === 0) {
+        if ($this->flags["enter"] && $this->count_errors() === 0) {
             $this->push_values();
             $this->set_page($this->data["page"] + 1);
-        } elseif($this->flags["back"]) {
+        } elseif ($this->flags["back"]) {
             $this->set_page($this->data["page"] - 1);
         }
 
-        if($this->flags["updated_data"]) {
+        if ($this->flags["updated_data"]) {
             $this->push_data();
         }
         return $this->data["page"];
@@ -237,16 +237,16 @@ class MofgForm
      */
     protected function count_errors()
     {
-        if(empty($_SESSION[$this->space]["items"])) {
+        if (empty($_SESSION[$this->space]["items"])) {
             return false;
         }
         $result = 0;
-        foreach($_SESSION[$this->space]["items"] as $k => $v) {
-            if($v["in_page"] !== $this->data["page"]) {
+        foreach ($_SESSION[$this->space]["items"] as $k => $v) {
+            if ($v["in_page"] !== $this->data["page"]) {
                 continue;
             }
-            if(!isset($this->errors[$k])) {
-                if(($e = $this->validate($k)) === self::E_NONE) {
+            if (!isset($this->errors[$k])) {
+                if (($e = $this->validate($k)) === self::E_NONE) {
                     continue;
                 }
                 $this->errors[$k] = (isset($this->data["error_message"][$e])) ? $this->data["error_message"][$e] : $this->data["error_message"][self::E_DEFAULT];
@@ -262,83 +262,83 @@ class MofgForm
      */
     public function validate($id)
     {
-        if(!isset($_SESSION[$this->space]["items"][$id])) {
+        if (!isset($_SESSION[$this->space]["items"][$id])) {
             return false;
         }
         $i = $_SESSION[$this->space]["items"][$id];
 
-        if($i["in_page"] !== $this->data["page"]) {
+        if ($i["in_page"] !== $this->data["page"]) {
             return self::E_NONE;
         }
 
-        if(!isset($this->values[$id]) || $this->values[$id] === "" || $this->values[$id] === []) {
-            if($i["required"]) {
+        if (!isset($this->values[$id]) || $this->values[$id] === "" || $this->values[$id] === []) {
+            if ($i["required"]) {
                 return self::E_REQUIRED;
             }
             return self::E_NONE;
         }
 
-        if(is_array($this->values[$id])) {
+        if (is_array($this->values[$id])) {
             return self::E_NONE;
         }
 
         $v = strval($this->values[$id]);
-        if(isset($i["rule"]["format"])) {
-            switch($i["rule"]["format"]) {
+        if (isset($i["rule"]["format"])) {
+            switch ($i["rule"]["format"]) {
                 case self::FMT_INT:
-                    if(!preg_match('/\A-?[1-9][0-9]*\z/', $v) && $v !== "0") {
+                    if (!preg_match('/\A-?[1-9][0-9]*\z/', $v) && $v !== "0") {
                         return self::E_FMT_INT;
                     }
                     break;
                 case self::FMT_ALP:
-                    if(!preg_match('/\A[a-zA-Z]+\z/', $v)) {
+                    if (!preg_match('/\A[a-zA-Z]+\z/', $v)) {
                         return self::E_FMT_ALP;
                     }
                     break;
                 case self::FMT_NUM:
-                    if(!preg_match('/\A-?[0-9]+\z/', $v)) {
+                    if (!preg_match('/\A-?[0-9]+\z/', $v)) {
                         return self::E_FMT_NUM;
                     }
                     break;
                 case self::FMT_ALPNUM:
-                    if(!preg_match('/\A[a-zA-Z0-9]+\z/', $v)) {
+                    if (!preg_match('/\A[a-zA-Z0-9]+\z/', $v)) {
                         return self::E_FMT_ALPNUM;
                     }
                     break;
                 case self::FMT_HIRA:
-                    if(!preg_match('/\A[ぁ-んー　 ]+\z/u', $v)) {
+                    if (!preg_match('/\A[ぁ-んー　 ]+\z/u', $v)) {
                         return self::E_FMT_HIRA;
                     }
                     break;
                 case self::FMT_KATA:
-                    if(!preg_match('/\A[ァ-ヶー　 ]+\z/u', $v)) {
+                    if (!preg_match('/\A[ァ-ヶー　 ]+\z/u', $v)) {
                         return self::E_FMT_KATA;
                     }
                     break;
                 case self::FMT_TEL:
-                    if(!preg_match('/\A[0-9]+(-[0-9]+)*\z/', $v)) {
+                    if (!preg_match('/\A[0-9]+(-[0-9]+)*\z/', $v)) {
                         return self::E_FMT_TEL;
                     }
                     break;
                 case self::FMT_EMAIL:
-                    if(!filter_var($v, FILTER_VALIDATE_EMAIL)) {
+                    if (!filter_var($v, FILTER_VALIDATE_EMAIL)) {
                         return self::E_FMT_EMAIL;
                     }
                     break;
                 case self::FMT_URL:
-                    if(!filter_var($v, FILTER_VALIDATE_URL)) {
+                    if (!filter_var($v, FILTER_VALIDATE_URL)) {
                         return self::E_FMT_URL;
                     }
                     break;
             }
         }
-        if(isset($i["rule"]["minlen"]) && mb_strlen($v) < $i["rule"]["minlen"]) {
+        if (isset($i["rule"]["minlen"]) && mb_strlen($v) < $i["rule"]["minlen"]) {
             return self::E_MINLEN;
         }
-        if(isset($i["rule"]["maxlen"]) && mb_strlen($v) > $i["rule"]["maxlen"]) {
+        if (isset($i["rule"]["maxlen"]) && mb_strlen($v) > $i["rule"]["maxlen"]) {
             return self::E_MAXLEN;
         }
-        if(isset($i["rule"]["pattern"]) && !preg_match($i["rule"]["pattern"], $v)) {
+        if (isset($i["rule"]["pattern"]) && !preg_match($i["rule"]["pattern"], $v)) {
             return self::E_PATTERN;
         }
         return self::E_NONE;
@@ -350,11 +350,11 @@ class MofgForm
      */
     protected function push_values()
     {
-        if(empty($_SESSION[$this->space]["items"])) {
+        if (empty($_SESSION[$this->space]["items"])) {
             return false;
         }
-        foreach($_SESSION[$this->space]["items"] as $k => $v) {
-            if($v["in_page"] !== $this->data["page"]) {
+        foreach ($_SESSION[$this->space]["items"] as $k => $v) {
+            if ($v["in_page"] !== $this->data["page"]) {
                 continue;
             }
             $_SESSION[$this->space]["items"][$k]["value"] = (isset($this->values[$k])) ? $this->values[$k] : null;
@@ -367,13 +367,13 @@ class MofgForm
      */
     public function remove_item($id)
     {
-        if(array_key_exists($id, $this->values)) {
+        if (array_key_exists($id, $this->values)) {
             unset($this->values[$id]);
         }
-        if(array_key_exists($id, $_SESSION[$this->space]["items"])) {
+        if (array_key_exists($id, $_SESSION[$this->space]["items"])) {
             unset($_SESSION[$this->space]["items"][$id]);
         }
-        if(array_key_exists($id, $this->errors)) {
+        if (array_key_exists($id, $this->errors)) {
             unset($this->errors[$id]);
         }
     }
@@ -386,10 +386,10 @@ class MofgForm
      */
     public function register_group($id, $title, $items, $separator = "")
     {
-        if(is_string($items) || is_numeric($items)) {
+        if (is_string($items) || is_numeric($items)) {
             $items = [$items];
         }
-        if(!is_array($items)) {
+        if (!is_array($items)) {
             $items = [];
         }
         $_SESSION[$this->space]["groups"][$id] = [
@@ -404,7 +404,7 @@ class MofgForm
      */
     public function remove_group($id)
     {
-        if(isset($_SESSION[$this->space]["groups"][$id])) {
+        if (isset($_SESSION[$this->space]["groups"][$id])) {
             unset($_SESSION[$this->space]["groups"][$id]);
         }
     }
@@ -451,7 +451,7 @@ class MofgForm
      */
     public function get_name_for($control)
     {
-        if(!in_array($control, [self::CTL_ENTER, self::CTL_BACK, self::CTL_RESET], true)) {
+        if (!in_array($control, [self::CTL_ENTER, self::CTL_BACK, self::CTL_RESET], true)) {
             return "";
         }
         return $this->data["name_for_".$control];
@@ -464,7 +464,7 @@ class MofgForm
      */
     public function set_name_for($control, $name)
     {
-        if(!in_array($control, [self::CTL_ENTER, self::CTL_BACK, self::CTL_RESET], true)) {
+        if (!in_array($control, [self::CTL_ENTER, self::CTL_BACK, self::CTL_RESET], true)) {
             return false;
         }
         $this->data["name_for_".$control] = $name;
@@ -478,7 +478,7 @@ class MofgForm
      */
     public function set_error_message($message)
     {
-        if(!is_array($message)) {
+        if (!is_array($message)) {
             return false;
         }
         $this->data["error_message"] = array_merge($this->data["error_message"], $message);
@@ -493,7 +493,7 @@ class MofgForm
      */
     public function set_value($id, $value)
     {
-        if(!is_string($value) && !is_array($value)) {
+        if (!is_string($value) && !is_array($value)) {
             return false;
         }
         $this->values[$id] = $value;
@@ -506,9 +506,9 @@ class MofgForm
      */
     public function get_value($id)
     {
-        if(isset($this->values[$id])) {
+        if (isset($this->values[$id])) {
             $value = $this->values[$id];
-        } elseif(isset($_SESSION[$this->space]["items"][$id]["value"])) {
+        } elseif (isset($_SESSION[$this->space]["items"][$id]["value"])) {
             $value = $_SESSION[$this->space]["items"][$id]["value"];
         }
         return (isset($value)) ? $value : false;
@@ -521,7 +521,7 @@ class MofgForm
      */
     public function set_error($id, $message)
     {
-        if(!is_string($message)) {
+        if (!is_string($message)) {
             return false;
         }
         $this->errors[$id] = $message;
@@ -544,21 +544,21 @@ class MofgForm
      */
     public function v($id, $add = true)
     {
-        if(!$this->flags["settled"] || !is_string($id)) {
+        if (!$this->flags["settled"] || !is_string($id)) {
             return;
         }
         $value = $this->get_value($id);
-        if(is_array($value)) {
+        if (is_array($value)) {
             $value = implode($this->data["array_glue"], $value);
         }
-        if($value === false) {
+        if ($value === false) {
             $value = "";
         }
-        if($add && $value !== "") {
-            if(isset($_SESSION[$this->space]["items"][$id]["add"]["before"])) {
+        if ($add && $value !== "") {
+            if (isset($_SESSION[$this->space]["items"][$id]["add"]["before"])) {
                 $value = $_SESSION[$this->space]["items"][$id]["add"]["before"].$value;
             }
-            if(isset($_SESSION[$this->space]["items"][$id]["add"]["after"])) {
+            if (isset($_SESSION[$this->space]["items"][$id]["add"]["after"])) {
                 $value = $value.$_SESSION[$this->space]["items"][$id]["add"]["after"];
             }
         }
@@ -571,7 +571,7 @@ class MofgForm
      */
     public function e($id)
     {
-        if(!$this->flags["settled"] || !is_string($id) || !isset($this->errors[$id])) {
+        if (!$this->flags["settled"] || !is_string($id) || !isset($this->errors[$id])) {
             return;
         }
         echo sprintf($this->data["error_format"], htmlspecialchars($this->errors[$id]));
@@ -590,36 +590,36 @@ class MofgForm
         $skip = [];
 
         $result = "";
-        foreach($items as $k => $v) {
-            if(in_array($k, $skip) || empty($v)) {
+        foreach ($items as $k => $v) {
+            if (in_array($k, $skip) || empty($v)) {
                 continue;
             }
 
-            foreach($groups as $gk => $gv) {
-                if(!in_array($k, $gv["items"])) {
+            foreach ($groups as $gk => $gv) {
+                if (!in_array($k, $gv["items"])) {
                     continue;
                 }
                 $result .= $title_open.$gv["title"].$title_close;
-                for($i = 0; $i < count($gv["items"]); $i++) {
+                for ($i = 0; $i < count($gv["items"]); $i++) {
                     $item = $gv["items"][$i];
-                    if(isset($items[$item]["value"]) && $items[$item]["value"] !== "" && $items[$item]["value"] !== []) {
-                        if(is_array($items[$item]["value"])) {
+                    if (isset($items[$item]["value"]) && $items[$item]["value"] !== "" && $items[$item]["value"] !== []) {
+                        if (is_array($items[$item]["value"])) {
                             $items[$item]["value"] = implode($this->data["array_glue"], $items[$item]["value"]);
                         }
-                        if(isset($items[$item]["add"]["before"])) {
+                        if (isset($items[$item]["add"]["before"])) {
                             $result .= $items[$item]["add"]["before"];
                         }
                         $result .= $items[$item]["value"];
-                        if(isset($items[$item]["add"]["after"])) {
+                        if (isset($items[$item]["add"]["after"])) {
                             $result .= $items[$item]["add"]["after"];
                         }
                     }
                     $result .= $gv["separator"];
-                    if(isset($items[$item])) {
+                    if (isset($items[$item])) {
                         $skip[] = $item;
                     }
                 }
-                if(($seplen = mb_strlen($gv["separator"])) > 0) {
+                if (($seplen = mb_strlen($gv["separator"])) > 0) {
                     $result = mb_substr($result, 0, -$seplen);
                 }
                 $result .= $separator;
@@ -627,22 +627,22 @@ class MofgForm
             }
 
             $result .= $title_open.$v["title"].$title_close;
-            if(isset($v["value"]) && $v["value"] !== "" && $v["value"] !== []) {
-                if(is_array($v["value"])) {
+            if (isset($v["value"]) && $v["value"] !== "" && $v["value"] !== []) {
+                if (is_array($v["value"])) {
                     $v["value"] = implode($this->data["array_glue"], $v["value"]);
                 }
-                if(isset($v["add"]["before"])) {
+                if (isset($v["add"]["before"])) {
                     $result .= $v["add"]["before"];
                 }
                 $result .= $v["value"];
-                if(isset($v["add"]["after"])) {
+                if (isset($v["add"]["after"])) {
                     $result .= $v["add"]["after"];
                 }
             }
             $result .= $separator;
         }
 
-        if(($seplen = mb_strlen($separator)) > 0) {
+        if (($seplen = mb_strlen($separator)) > 0) {
             $result = mb_substr($result, 0, -$seplen);
         }
         return $result;
@@ -655,17 +655,17 @@ class MofgForm
      */
     public function apply_filter($data, $filter)
     {
-        if(!is_string($data)) {
+        if (!is_string($data)) {
             return $data;
         }
         $result = $data;
-        if(is_array($filter)) {
-            foreach($filter as $i) {
+        if (is_array($filter)) {
+            foreach ($filter as $i) {
                 $result = $this->apply_filter($result, $i);
             }
         } else {
             $filter = intval($filter);
-            switch($filter) {
+            switch ($filter) {
                 case self::FLT_TO_ZENKAKU_KANA:
                     $result = mb_convert_kana($result, "KV");
                     break;
