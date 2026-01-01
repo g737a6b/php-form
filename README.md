@@ -1,8 +1,8 @@
 # MofgForm ![main](https://github.com/g737a6b/php-form/workflows/main/badge.svg)
 
-PHP form library.
+A PHP library for building and handling web forms.
 
-## Examples of use
+## Usage Examples
 
 See `demo/`.
 
@@ -13,18 +13,18 @@ docker run -it --rm -p 8080:80 -v $(pwd):/var/www/html php:7.4-apache
 
 ## Features
 
-MofgForm is suited to all web forms.
+MofgForm is designed for building a wide range of web forms.
 
 - All basic input types (text, select, radio, checkbox, textarea and password)
 - Unlimited pages
 - Validation
 - Filtering
 - HTML generation
-- Sending email
-- Summarizing submitted form
+- Email sending
+- Form submission summary
 - Lightweight
 - Installation using Composer
-- MIT Licence
+- MIT License
 
 ## Installation
 
@@ -45,7 +45,7 @@ Add a dependency to your project's `composer.json` file.
 ### Install dependencies
 
 ```sh
-docker run -it --rm -v $(pwd):/app composer:2.6.6 install
+docker run -it --rm -v $(pwd):/app composer:2.9.2 install
 ```
 
 ### Run tests
@@ -58,4 +58,4 @@ docker run -it --rm -v $(pwd):/app -w /app php:8.3 ./vendor/bin/phpunit ./tests
 
 [The MIT License](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2023 [Hiroyuki Suzuki](https://mofg-in-progress.com)
+Copyright (c) 2026 [Hiroyuki Suzuki](https://mofg-in-progress.com)
