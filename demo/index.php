@@ -77,7 +77,7 @@ if( $page === 3 ){
 	<div id="header">
 		<h1 class="fz30 fwb"><a href="./" class="tdn">MofgForm</a></h1>
 		<p>
-			<span class="dib">PHP form library.</span>
+			<span class="dib">A PHP library for building and handling web forms.</span>
 			<span class="dib"><label for="menu-toggle" class="curp link-like color-01">View features</label>.</span>
 		</p>
 	</div><!-- #header -->
@@ -167,7 +167,7 @@ if( $page === 3 ){
 
 	<div id="footer">
 		<div><a href="https://github.com/g737a6b/php-form">Download/View Source on Github</a></div>
-		<div class="copyright">(c) 2021 Hiroyuki Suzuki <a href="https://mofg.net/">mofg.net</a></div>
+		<div class="copyright">(c) 2026 <a href="https://mofg-in-progress.com">Hiroyuki Suzuki</a></div>
 	</div><!-- #footer -->
 
 	<div id="menu">
@@ -176,18 +176,18 @@ if( $page === 3 ){
 			<div class="mb10 fz14"><label for="menu-toggle" class="link-like">&laquo; Back to DEMO</label></div>
 			<div class="fz30 fwb">MofgForm</div>
 			<h2 class="fz20 fwb mt20">Features</h2>
-			<p class="mt20">MofgForm is suited to all web forms.</p>
+			<p class="mt20">MofgForm is designed for building a wide range of web forms.</p>
 			<ul class="list-01 mt20">
 				<li class="list-01__item">All basic input types (text, select, radio, checkbox, textarea and password)</li>
 				<li class="list-01__item">Unlimited pages</li>
 				<li class="list-01__item">Validation</li>
 				<li class="list-01__item">Filtering</li>
 				<li class="list-01__item">HTML generation</li>
-				<li class="list-01__item">Sending email</li>
-				<li class="list-01__item">Summarizing submitted form</li>
+				<li class="list-01__item">Email sending</li>
+				<li class="list-01__item">Form submission summary</li>
 				<li class="list-01__item">Lightweight</li>
 				<li class="list-01__item">Installation using Composer</li>
-				<li class="list-01__item">MIT Licence</li>
+				<li class="list-01__item">MIT License</li>
 			</ul>
 		</div>
 	</div><!-- #menu -->
