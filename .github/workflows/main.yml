@@ -17,4 +17,4 @@ jobs:
       - name: Run PHPUnit tests
         run: docker run --rm -v $GITHUB_WORKSPACE:/app -w /app php:8.5 ./vendor/bin/phpunit ./tests
       - name: Run PHP-CS-Fixer
-        run: docker run --rm -v $GITHUB_WORKSPACE:/app -w /app php:8.5 ./vendor/bin/php-cs-fixer check ./src
+        run: docker run --rm -v $GITHUB_WORKSPACE:/app -w /app php:8.3 ./vendor/bin/php-cs-fixer check ./src
