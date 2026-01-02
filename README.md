@@ -57,11 +57,11 @@ docker run -it --rm -v $(pwd):/app -w /app php:8.5 ./vendor/bin/phpunit ./tests
 ### Format code
 
 ```sh
-docker run -it --rm -v $(pwd):/app -w /app php:8.5 ./vendor/bin/php-cs-fixer fix ./src
+docker run -it --rm -v $(pwd):/app -w /app php:8.3 ./vendor/bin/php-cs-fixer fix ./src
 ```
 
 ## License
 
 [The MIT License](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2026 [Hiroyuki Suzuki](https://mofg-in-progress.com)
+Copyright (c) 2016-2026 [Hiroyuki Suzuki](https://mofg-in-progress.com)
